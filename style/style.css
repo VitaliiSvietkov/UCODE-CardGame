@@ -19,13 +19,18 @@
 
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
+
+  border-radius: 50%;
 }
 .coin:hover {
+  /*
   transform: rotateX(180deg);
   -o-transform: rotateX(180deg);
   -ms-transform: rotateX(180deg);
   -webkit-transform: rotateX(180deg);
   -moz-transform: rotateX(180deg);
+  */
+  box-shadow: 0px 0px 5px blue;
 }
 .enemy_coin {
   position: absolute;
@@ -46,6 +51,61 @@
 
   background-size: 100%;
   background-image: url("../assets/images/CoinOponent.png");
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+/* ========================================================== */
+
+/*                            COIN                            */
+/* ========================================================== */
+.card {
+  position: fixed;
+  width: 100px;
+  height: 150px;
+
+  transition: all 2s;
+  -o-transition: all 2s;
+  -webkit-transition: all 2s;
+  -moz-transition: all 2s;
+
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+
+  background-size: 100%;
+  background-image: url("../assets/images/Yennefer_Conjurer.png");
+
+  border-radius: 5px;
+}
+.card:hover {
+  transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+.card_back {
+  position: absolute;
+  width: 100px;
+  height: 150px;
+
+  transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+
+  transition: all 2s;
+  -o-transition: all 2s;
+  -webkit-transition: all 2s;
+  -moz-transition: all 2s;
+
+  background-size: 100%;
+  background-image: url("../assets/images/NilfgaardBack.png");
 
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
