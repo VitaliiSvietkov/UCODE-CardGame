@@ -1,0 +1,52 @@
+/*                            COIN                            */
+/* ========================================================== */
+.coin {
+  width: 100px;
+  height: 100px;
+
+  transition: all 2s;
+  -o-transition: all 2s;
+  -webkit-transition: all 2s;
+  -moz-transition: all 2s;
+
+  background-image: url("../assets/images/CoinPlayer.png");
+  background-size: 100%;
+
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+.coin:hover {
+  transform: rotateX(180deg);
+  -o-transform: rotateX(180deg);
+  -ms-transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+}
+.enemy_coin {
+  position: absolute;
+
+  transform: rotateX(180deg);
+  -o-transform: rotateX(180deg);
+  -ms-transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+
+  width: 100px;
+  height: 100px;
+
+  transition: all 2s;
+  -o-transition: all 2s;
+  -webkit-transition: all 2s;
+  -moz-transition: all 2s;
+
+  background-size: 100%;
+  background-image: url("../assets/images/CoinOponent.png");
+
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+/* ========================================================== */
