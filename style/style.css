@@ -1,8 +1,13 @@
+
 /*                            COIN                            */
 /* ========================================================== */
 .coin {
-  width: 100px;
-  height: 100px;
+  position: fixed;
+  right: 20px;
+  top: 45%;
+
+  width: 80px;
+  height: 80px;
 
   transition: all 2s;
   -o-transition: all 2s;
@@ -31,8 +36,8 @@
   -webkit-transform: rotateX(180deg);
   -moz-transform: rotateX(180deg);
 
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
 
   transition: all 2s;
   -o-transition: all 2s;
