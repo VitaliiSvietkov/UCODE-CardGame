@@ -32,7 +32,7 @@
   */
 }
 .enemy_coin {
-  position: absolute;
+  /*position: absolute;*/
 
   transform: rotateX(180deg);
   -o-transform: rotateX(180deg);
@@ -60,7 +60,7 @@
 }
 /* ========================================================== */
 
-/*                            COIN                            */
+/*                            CARD                            */
 /* ========================================================== */
 .card {
   width: 100px;
@@ -77,11 +77,6 @@
   background-size: 100%;
 
   border-radius: 5px;
-
-
-
-  bottom: 20px;
-  left: 45%;
 }
 .card:hover {
   width: 110px;
@@ -91,11 +86,11 @@
   margin-top: -7.5px;
 }
 .card_face {
-  position: fixed;
+  position: relative;
   background-image: url("../assets/images/Yennefer_Conjurer.png");
 }
 .card_back {
-  position: absolute;
+  /*position: absolute;*/
   width: 100px;
   height: 150px;
 
@@ -112,3 +107,13 @@
   -moz-backface-visibility: hidden;
 }
 /* ========================================================== */
+
+.hand {
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  bottom: 0;
+  left: calc(50% - 30em);
+  display: flex;
+  gap: 5px;
+}
