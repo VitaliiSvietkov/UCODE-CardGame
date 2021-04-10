@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700;900&display=swap');
+
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 16px;
+}
+
+html {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+
+  background: url("../assets/images/Back1.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  width: fit-content;
+  margin: auto;
+
+}
+form {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  gap: 10px;
+
+  width: 40vw;
+  padding: 20px;
+  border-radius: 20px;
+
+  background: green;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid black;
+
+  font-size: 1.2rem;
+}
+button {
+  padding: 10px;
+  outline: none;
+  border: 1px solid black;
+  font-size: 1.2rem;
+}
+button:hover {
+  cursor: pointer;
+}
+
+#main_container {
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
