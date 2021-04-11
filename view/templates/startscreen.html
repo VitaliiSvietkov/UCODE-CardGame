@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(U)GWENT</title>
+    <link rel="stylesheet" href="style/startscreen.css">
+</head>
+
+<body>
+    <div id="main_container">
+        <form id="login" action="" method="POST">
+          <input required type="text" name="username" placeholder="Login">
+          <input required type="password" name="password" placeholder="Password">
+    
+          <button type="submit" name="transit" value="authorization">Log in</button>
+          <button onclick="transit('login', 'registration')" formnovalidate>Create account</button>
+          <a href="?operation=remind">Forgot a password?</a>
+        </form>
+
+        <form id="registration" action="" method="POST">
+            <input required type="text" name="username" placeholder="Login">
+            <input required type="password" name="password" placeholder="Password">
+            <input required type="password" name="confirm" placeholder="Confirm password">
+            <input required type="text" name="name" placeholder="Full name">
+            <input required type="email" name="email" placeholder="Email">
+      
+            <button type="submit" name="transit" value="usr_create">Sign up</button>
+            <button onclick="transit('registration', 'login')" formnovalidate>Back</button>
+            <a href="?operation=remind">Forgot a password?</a>
+        </form>
+    </div>
+    <script src="js/startscreen.js"></script>
+</body>
+</html>

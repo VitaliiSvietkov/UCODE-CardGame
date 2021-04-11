@@ -69,3 +69,7 @@ button:hover {
   left: 0;
   right: 0;
 }
+
+#registration, #remind {
+  display: none;
+}

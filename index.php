@@ -5,7 +5,7 @@
   session_start();
 
   if (!isset($_SESSION["transition"]))
-    $_SESSION["transition"] = "login";
+    $_SESSION["transition"] = "startscreen";
   
   if (!isset($_SESSION["controller"]))
     $_SESSION["controller"] = new Controller();
