@@ -14,7 +14,7 @@ body {
   padding: 0;
   margin: 0;
 
-  background: url("../assets/images/Back1.png");
+  background: url("../assets/images/Background/Back1.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
 }
@@ -37,6 +37,7 @@ form {
   border-radius: 20px;
 
   background: green;
+  transition: all 0.2s;
 }
 
 input {
