@@ -7,31 +7,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>(U)GWENT</title>
     <link rel="stylesheet" href="style/startscreen.css">
+    <script src="js/startscreen.js"></script>
 </head>
 
 <body>
     <div id="main_container">
-        <form id="login" action="" method="POST">
-          <input required type="text" name="username" placeholder="Login">
-          <input required type="password" name="password" placeholder="Password">
-    
-          <button type="submit" name="transit" value="authorization">Log in</button>
-          <button onclick="transit('login', 'registration')" formnovalidate>Create account</button>
-          <a href="?operation=remind">Forgot a password?</a>
-        </form>
-
-        <form id="registration" action="" method="POST">
+        <div id="login" class="form_container">
+            <form action="" method="POST">
             <input required type="text" name="username" placeholder="Login">
             <input required type="password" name="password" placeholder="Password">
-            <input required type="password" name="confirm" placeholder="Confirm password">
-            <input required type="text" name="name" placeholder="Full name">
-            <input required type="email" name="email" placeholder="Email">
-      
-            <button type="submit" name="transit" value="usr_create">Sign up</button>
-            <button onclick="transit('registration', 'login')" formnovalidate>Back</button>
+        
+            <button type="submit" name="transit" value="authorization">Log in</button>
+            </form>
+            <button type="button" onclick="transit('login', 'registration');">Create account</button>
             <a href="?operation=remind">Forgot a password?</a>
-        </form>
+        </div>
+
+        <div id="registration" class="form_container">
+            <form action="" method="POST">
+                <input required type="text" name="username" placeholder="Login">
+                <input required type="password" name="password" placeholder="Password">
+                <input required type="password" name="confirm" placeholder="Confirm password">
+                <input required type="text" name="name" placeholder="Full name">
+                <input required type="email" name="email" placeholder="Email">
+        
+                <button type="submit" name="transit" value="usr_create">Sign up</button>
+            </form>
+            <button onclick="transit('registration', 'login');">Back</button>
+            <a href="?operation=remind">Forgot a password?</a>
+        </div>
     </div>
-    <script src="js/startscreen.js"></script>
 </body>
+
 </html>
