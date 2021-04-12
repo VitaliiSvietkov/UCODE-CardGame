@@ -20,7 +20,7 @@
             <button type="submit" name="transit" value="authorization">Log in</button>
             </form>
             <button type="button" onclick="transit('login', 'registration');">Create account</button>
-            <a href="?operation=remind">Forgot a password?</a>
+            <button type="button" onclick="transit('login', 'remind');" class="remind">Forgot a password?</button>
         </div>
 
         <div id="registration" class="form_container">
@@ -34,7 +34,16 @@
                 <button type="submit" name="transit" value="usr_create">Sign up</button>
             </form>
             <button onclick="transit('registration', 'login');">Back</button>
-            <a href="?operation=remind">Forgot a password?</a>
+            <button type="button" onclick="transit('registration', 'remind');" class="remind">Forgot a password?</button>
+        </div>
+
+        <div id="remind" class="form_container">
+            <form action="" method="POST">
+            <input required type="text" name="username" placeholder="Login">
+        
+            <button type="submit" name="transit" value="authorization">Send a password</button>
+            </form>
+            <button type="button" onclick="transit('remind', 'login');">Back</button>
         </div>
     </div>
 </body>

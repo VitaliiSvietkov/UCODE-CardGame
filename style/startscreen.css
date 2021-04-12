@@ -11,20 +11,17 @@ html {
 }
 
 body {
+  height: 100vh;
   padding: 0;
   margin: 0;
 
-  background: url("../assets/images/Background/Back1.jpg");
+  background-image: url("../assets/images/Background/Back5.jpeg");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: auto 100%;
+  background-position: center top;
+  background-attachment: fixed;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  width: fit-content;
-  margin: auto;
-}
 form {
   display: flex;
   flex-direction: column;
@@ -77,6 +74,14 @@ button:hover {
   right: 0;
 }
 
+.remind {
+  background: none;
+  padding: none;
+  outline: none;
+  border: none;
+  font-size: 0.9rem;
+  margin: -10px 0 -15px 0;
+}
 #registration, #remind {
   display: none;
 }
