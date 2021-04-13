@@ -456,6 +456,9 @@ class WebsocketHandler extends WebsocketWorker
             case "authorization":
                 $this->Login($data, $from);
                 break;
+            case "remind":
+                $this->Remind($data, $from);
+                break;
             case "GETinfo":
                 $this->GETinfo($data, $from);
                 break;
@@ -484,6 +487,22 @@ class WebsocketHandler extends WebsocketWorker
         require_once(__DIR__ . "/models/Login.php");
         $log_entity = new Login("card_game", $data["login"], $data["password"]);
         $res = $log_entity->enter();
+        if ($res) {
+            $answer = array('status'=>'FAIL', 'message'=>$res);
+            $answer = $this->encode(json_encode($answer));
+            @fwrite($from, $answer);
+        }
+        else {
+            $answer = array('status'=>'SUCCESS');
+            $answer = $this->encode(json_encode($answer));
+            @fwrite($from, $answer);
+        }
+    }
+
+    private function Remind($data, $from) {
+        require_once(__DIR__ . "/models/Remind.php");
+        $remind_entity = new Remind("card_game", $data["username"]);
+        $res = $remind_entity->send();
         if ($res) {
             $answer = array('status'=>'FAIL', 'message'=>$res);
             $answer = $this->encode(json_encode($answer));

@@ -21,14 +21,14 @@
             lose INT NOT NULL DEFAULT 0
         );");
         $statement = $this->database->connection->query("SELECT password, email FROM users WHERE login='$this->login'");
-            $fetch = $statement->fetch(PDO::FETCH_ASSOC);
-            if (!$fetch)
-                $_SESSION["error"] = array("Such user does not exists", "remind");
-            else {
-                $status = mail($fetch["email"], "Password reminder", $fetch["password"]);
-                if (!$status)
-                    $_SESSION["error"] = array("Something went wrong", "remind");
-            }
+        $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+        if (!$fetch)
+            return "Such user does not exists";
+        else {
+            $status = mail($fetch["email"], "Password reminder", $fetch["password"]);
+            if (!$status)
+                return "Something went wrong";
+        }
       }
     }
   }

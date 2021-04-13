@@ -12,10 +12,15 @@ client.onmessage = function (e) {
     document.getElementsByName('confirm')[0].value = "";
   }
   else {
-    if (document.getElementById('login').children[0].children[0].value !== "")
-      document.getElementById('login').children[0].submit();
-    else
-      document.getElementById('registration').children[0].submit();
+    if (document.getElementById('remind').style.display === 'flex') {
+      transit('remind', 'login');
+    }
+    else {
+      if (document.getElementById('login').children[0].children[0].value !== "")
+        document.getElementById('login').children[0].submit();
+      else
+        document.getElementById('registration').children[0].submit();
+    }
   }
 }
 
@@ -49,6 +54,15 @@ function processRegistration() {
   setTimeout(() => {
     client.send(JSON.stringify(arr));
    }, 10);
+  return false;
+}
+
+function processRemind() {
+  let login = document.getElementsByName('username')[2].value;
+  let arr = {operation: 'remind', username: login};
+  setTimeout(() => {
+    client.send(JSON.stringify(arr));
+  }, 10);
   return false;
 }
 

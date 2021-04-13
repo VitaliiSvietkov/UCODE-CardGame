@@ -9,11 +9,6 @@ class Controller {
   public function transit() {
     if (isset($_POST["transit"])) {
       switch($_POST["transit"]) {
-        case "remind":
-          require_once(__DIR__ . "/../models/Remind.php");
-          $remind_entity = new Remind("card_game", $_POST["username"]);
-          $remind_entity->send();
-          break;
         case "exit":
           unset($_SESSION["user"]);
           setcookie("user", "", time() - 3600);

@@ -38,10 +38,10 @@
         </div>
 
         <div id="remind" class="form_container">
-            <form action="" method="POST">
+            <form action="" method="POST" onsubmit="return processRemind();">
                 <input required type="text" name="username" placeholder="Login">
             
-                <button type="submit" name="transit" value="remind">Send a password</button>
+                <button type="submit">Send a password</button>
             </form>
             <button type="button" onclick="transit('remind', 'login');">Back</button>
         </div>

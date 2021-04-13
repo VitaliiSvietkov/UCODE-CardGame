@@ -1,6 +1,9 @@
 var host = getCookie('servHost');
 var client = new WebSocket(`ws://${host}:8000`);
 
+var cardDesc = ['Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae officia vitae similique odit laudantium ratione nam qui accusantium! Sed, nihil odit. Molestias quod vel quos nemo, in soluta minima suscipit!',
+    "second description", "third description"];
+
 client.onmessage = function (e) {
     let msg = JSON.parse(e.data);
     document.getElementById('name').innerHTML = msg['name'];
@@ -29,4 +32,10 @@ function getCookie(cname) {
     return "";
 }
 
-setTimeout(getItems, 200);
+var characters =  document.getElementById('chose_hero').children;
+for (let i = 0; i < characters.length; ++i) {
+    characters[i].onclick = () => {
+        document.getElementById('des').innerHTML = cardDesc[i];
+    }
+}
+setTimeout(getItems, 100);
