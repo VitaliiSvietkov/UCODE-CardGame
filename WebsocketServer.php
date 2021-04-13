@@ -410,6 +410,14 @@ class WebsocketHandler extends WebsocketWorker
     protected function onMessage($client, $data) {//вызывается при получении сообщения от клиента
         $data = $this->decode($data);
 
+        if (!$data['payload']) {
+            return;
+        }
+
+        if (!mb_check_encoding($data['payload'], 'utf-8')) {
+            return;
+        }
+        
         //var_export($data);
         //шлем всем сообщение, о том, что пишет один из клиентов
         $message = 'пользователь #' . intval($client) . ' (' . $this->pid . '): ' . strip_tags($data['payload']);
