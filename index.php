@@ -6,9 +6,7 @@
   require_once(__DIR__ . "/controller/Controller.php");
 
   session_start();
-
-  //if (isset($_SESSION["error"]))
-  //  unset($_SESSION["error"]);
+  setcookie("servHost", $_SERVER['SERVER_NAME'], time() + 20, "/");
 
   if (!isset($_SESSION["transition"]))
     $_SESSION["transition"] = "startscreen";
@@ -18,10 +16,4 @@
 
   $_SESSION["controller"]->transit();
   $_SESSION["controller"]->execute();
-
-  /*if (isset($_SESSION["error"])) {
-    echo "<script>
-    transit('login', '" . $_SESSION["error"][1] . "');
-    document.getElementById('perror').innerHTML = '" . $_SESSION["error"][0] . "';</script>";
-  }*/
   
