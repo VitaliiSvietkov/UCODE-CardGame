@@ -23,17 +23,15 @@
   border-radius: 50%;
 }
 .coin:hover {
-  /*
+  
   transform: rotateX(180deg);
   -o-transform: rotateX(180deg);
   -ms-transform: rotateX(180deg);
   -webkit-transform: rotateX(180deg);
   -moz-transform: rotateX(180deg);
-  */
 }
-.enemy_coin {
-  /*position: absolute;*/
 
+.enemy_coin {
   transform: rotateX(180deg);
   -o-transform: rotateX(180deg);
   -ms-transform: rotateX(180deg);
@@ -64,7 +62,7 @@
 /* ========================================================== */
 .card {
   width: 100px;
-  height: 150px;
+  height: 145px;
 
   transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -75,22 +73,23 @@
   -webkit-transform-style: preserve-3d;
 
   background-size: 100%;
-
   border-radius: 5px;
 }
+
 .card:hover {
-  width: 110px;
-  height: 165px;
+  width: 110px; 
+  height: 160px;
+  bottom: 20px; 
   background-size: contain;
-  margin-left: -5px;
-  margin-top: -7.5px;
+  z-index: 2;
 }
+
 .card_face {
   position: relative;
   background-image: url("../assets/images/Yennefer_Conjurer.png");
+
 }
 .card_back {
-  /*position: absolute;*/
   width: 100px;
   height: 150px;
 
@@ -112,8 +111,85 @@
   position: fixed;
   width: fit-content;
   height: fit-content;
-  bottom: 0;
+  bottom: 25px;
   left: calc(50% - 30em);
   display: flex;
   gap: 5px;
+}
+
+.hand:hover{
+  bottom: 25px;
+  width: 110px; 
+  height: 160px;
+}
+
+.handUp {
+  position: fixed;
+  width: fit-content;
+  height: fit-content;
+  top: 25px;
+  left: calc(50% - 30em);
+  display: flex;
+  gap: 5px;
+}
+
+ img{
+   width: 150px;
+   height: 150px;
+   object-fit: cover;
+   object-position: 0 0;
+ }
+
+ #you{
+   position: fixed;
+   bottom: 175px;
+   right: calc(50% - 150px/2);
+   z-index: 2;
+ }
+
+ #enemy{
+  position: fixed;
+  top: 175px;
+  right: calc(50% - 150px/2);
+}
+
+.circle.left {
+  position: absolute;
+  clip: rect(0, 100px, 100px, 50px);
+}
+
+.circle.right {
+  position: absolute;
+  clip: rect(0px, 50px, 100px, 0px);
+}
+
+.circle span {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  position: absolute;
+  opacity: 0.5;
+  border: 10px solid #b15ca3;
+}
+
+.circle.left span {
+  clip: rect(0px, 50px, 100px, 0px);
+  -webkit-animation: rotate-left 30s  linear;
+}
+
+.circle.right span {
+  clip: rect(0, 100px, 100px, 50px);
+  -webkit-animation: rotate-right 30s  linear;
+}
+
+@-webkit-keyframes rotate-left {
+  0% { -webkit-transform: rotate(0deg); border: 10px solid #000000;}
+  50% { -webkit-transform: rotate(180deg); border: 10px solid #594d57;}
+  100% { -webkit-transform: rotate(180deg); border: 10px solid #ff00d4;}
+}
+
+@-webkit-keyframes rotate-right {
+  0% { -webkit-transform: rotate(0deg); }
+  50% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(180deg); }
 }

@@ -15,11 +15,12 @@ body {
   padding: 0;
   margin: 0;
 
-  background-image: url("../assets/images/Background/Back5.jpeg");
+  background-image: url("../assets/images/Background/wp4943547-marvel-art-wallpapers.jpg");
   background-repeat: no-repeat;
   background-size: auto 100%;
   background-position: center top;
   background-attachment: fixed;
+  background-color: gray;
 }
 
 form {
@@ -37,29 +38,57 @@ form {
   gap: 10px;
 
   width: 20vw;
+  min-width: 400px;
   padding: 20px;
   border-radius: 20px;
 
-  background: green;
+  /* background: green; */
   transition: all 0.2s;
+  margin: auto;
 }
 
 input {
   padding: 10px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   outline: none;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 
   font-size: 1.2rem;
+  color: white;
+  
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(206, 206, 203, 0.276);
+  transition: 0.2s linear;
 }
+input::placeholder {
+  color: rgba(255, 255, 255, 0.576);
+}
+input:hover, :focus{
+  border-bottom: 1px solid white;
+  color: rgba(255, 255, 255, 0.831);
+}
+input:hover::placeholder{
+  color: rgba(255, 255, 255, 0.831);
+}
+
 button {
   padding: 10px;
   outline: none;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  border: none;
   font-size: 1.2rem;
+  transition: 0.5s linear;
+  background: rgba(201, 199, 199, 0.153);
+  color: aliceblue;
 }
 button:hover {
   cursor: pointer;
+  background-color: rgba(206, 206, 203, 0.276);
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+button:active{
+  border: none;
 }
 
 #main_container {
@@ -72,16 +101,35 @@ button:hover {
   bottom: 0;
   left: 0;
   right: 0;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+  border-radius: 15px;
 }
 
 .remind {
-  background: none;
   padding: none;
   outline: none;
   border: none;
   font-size: 0.9rem;
   margin: -10px 0 -15px 0;
+  color: rgba(255, 255, 255, 0.873);
+  background: none;
+}
+.remind:hover{
+  background: none;
+  box-shadow: none;
 }
 #registration, #remind {
   display: none;
 }
+
+.error {
+  color: red;
+  font-weight: 700;
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+
+
+
