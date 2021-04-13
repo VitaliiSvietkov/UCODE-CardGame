@@ -1,5 +1,4 @@
 var host = getCookie('servHost');
-
 var client = new WebSocket(`ws://${host}:8000`);
 
 client.onmessage = function (e) {

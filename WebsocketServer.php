@@ -456,6 +456,9 @@ class WebsocketHandler extends WebsocketWorker
             case "authorization":
                 $this->Login($data, $from);
                 break;
+            case "GETinfo":
+                $this->GETinfo($data, $from);
+                break;
             default:
                 break;
         }
@@ -491,5 +494,14 @@ class WebsocketHandler extends WebsocketWorker
             $answer = $this->encode(json_encode($answer));
             @fwrite($from, $answer);
         }
+    }
+
+    private function GETinfo($data, $from) {
+        require_once(__DIR__ . "/models/User.php");
+        $user_entity = new User("card_game", $data["target"]);
+        $answer = array("name"=>$user_entity->name, "email"=>$user_entity->email, "win"=>$user_entity->win,
+            "lose"=>$user_entity->lose);
+        $answer = $this->encode(json_encode($answer));
+        @fwrite($from, $answer);
     }
 }
