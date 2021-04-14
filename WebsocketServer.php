@@ -616,6 +616,7 @@ class WebsocketHandler extends WebsocketWorker
                 $answer = array("operation"=>"OponentInfo", "OponentID"=>$serv_id, "OponentLogin"=>$fetch["login"]);
                 $answer = $this->encode(json_encode($answer));
                 @fwrite($from, $answer);
+                $database->connection->query("DELETE FROM search_lobby WHERE serv_id=$serv_id");
             }
         }
     }
