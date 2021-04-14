@@ -5,53 +5,85 @@
   <meta charset="utf-8">
   <meta name="description" content="Card Game">
   <link rel="stylesheet" href="style/style.css">
+  <script src="js/utils.js"></script>
 </head>
 
 <body>
   <!-- <input type="button" value="Rotate" onclick="rotateCoin()"> -->
-  <div class="coin" id="coinFace"><div class="enemy_coin" id="coinBack"></div></div>
-
-  <form id="finish" action="" method="POST" onsubmit="return checkGame()">
-    <input type="submit" value="Surrender" onclick="surrender()">
-  </form>
-
-  <div class="hand aly">
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-    <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
-  </div>
-  <img id="enemy" src="assets/images/2.gif" alt="">
-
-
-
-
-  <div class="radial">
-    <div class="circle left rotate"><span></span></div>
-    <div class="circle right rotate"><span></span></div>
-    
-    <div class="loop" data-val="1  2  3  4  5"></div>
+<div id="myProgress">
+  <div id="myBar"></div>
 </div>
 
-  <img id="you" src="assets/images/3.gif" alt="">
-  <div class="handUp aly">
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
-    <div class="card card_face"><div class="card card_back"></div></div>
+<form id="finish" action="" method="POST" onsubmit="return checkGame()">
+  <input type="submit" value="Surrender" onclick="surrender()">
+</form>
+
+<script src="js/time.js"></script>
+
+
+  <div class="coin" id="coinFace"><div class="enemy_coin" id="coinBack"></div></div>
+
+  <div id="oponentHand" class="hand">
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
+      <div class="card"></div>
   </div>
+
+  <img id="enemy" src="assets/images/2.gif" alt="">
+
+  <div id="Elogin">Login enemy</div>
+  <div id="Ylogin">Your login</div>
+
+
+  <img id="you" src="assets/images/3.gif" alt="">
+  <div class="handUp">
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+    <div class="card"></div>
+  </div>
+
+  <div id="SteckC">
+    <div class="card"></div>
+  </div>
+  
+
+
+  <div id="YourStone">
+    <div id="stone">
+      <img src="assets/images/stone/1.png" alt="">
+      <img src="assets/images/stone/2.png" alt="">
+      <img src="assets/images/stone/3.png" alt="">
+      <img src="assets/images/stone/4.png" alt="">
+      <img src="assets/images/stone/5.png" class="DeStone" alt="">
+      <img src="assets/images/stone/6.png" class="DeStone" alt="">
+    </div>
+  </div>
+
+  <div id="EnemyStone">
+    <div id="stone">
+      <img src="assets/images/stone/1.png" alt="">
+      <img src="assets/images/stone/2.png" alt="">
+      <img src="assets/images/stone/3.png" alt="">
+      <img src="assets/images/stone/4.png" alt="">
+      <img src="assets/images/stone/5.png" alt="">
+      <img src="assets/images/stone/6.png" class="DeStone" alt="">
+    </div>
+  </div>
+
+
 
   <script src="js/script.js"></script>
 </body>

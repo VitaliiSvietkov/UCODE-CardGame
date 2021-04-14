@@ -1,4 +1,11 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700;900&display=swap');
+
+* {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+
 /*                            COIN                            */
 /* ========================================================== */
 .coin {
@@ -74,9 +81,11 @@
 
   background-size: 100%;
   border-radius: 5px;
+  position: relative;
+  background-image: url("../assets/images/Yennefer_Conjurer.png");
 }
 
-.card:hover {
+.hand .card:hover {
   width: 110px; 
   height: 160px;
   bottom: 20px; 
@@ -84,44 +93,17 @@
   z-index: 2;
 }
 
-.card_face {
-  position: relative;
-  background-image: url("../assets/images/Yennefer_Conjurer.png");
-
-}
-.card_back {
-  width: 100px;
-  height: 150px;
-
-  transform: rotateY(180deg);
-  -o-transform: rotateY(180deg);
-  -ms-transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
-
-  background-image: url("../assets/images/NilfgaardBack.png");
-
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-}
-/* ========================================================== */
-
 .hand {
   position: fixed;
   width: fit-content;
   height: fit-content;
-  bottom: 25px;
+  top: 87%;
   left: calc(50% - 30em);
   display: flex;
   gap: 5px;
 }
 
-.hand:hover{
-  bottom: 25px;
-  width: 110px; 
-  height: 160px;
-}
+
 
 .handUp {
   position: fixed;
@@ -138,7 +120,15 @@
    height: 150px;
    object-fit: cover;
    object-position: 0 0;
+   border-radius: 100px;
  }
+
+ #SteckC .card{
+   position: fixed;
+   top: calc(50% - 150px/2);
+ }
+
+/* ===========================AVA============================= */
 
  #you{
    position: fixed;
@@ -153,43 +143,143 @@
   right: calc(50% - 150px/2);
 }
 
-.circle.left {
+/* -------------------------------TIMER--------------------------------- */
+.diagram {
+  width: 200px;
+  height:200px;
+  top: 5%;
+  left: 87%;
+
+  border-radius: 50%;
+  background: #990;
+  position: relative;
+  overflow: hidden;
+}
+.diagram::before {
+  content: '';
+  display: block;
   position: absolute;
-  clip: rect(0, 100px, 100px, 50px);
+  top:20px;
+  left:20px;
+  right:20px;
+  bottom:20px;
+  border-radius: 50%;
+  background: #ccc;
+  z-index: 3;
+  opacity: 1;
 }
-
-.circle.right {
+.diagram .piece {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  overflow: hidden;
   position: absolute;
-  clip: rect(0px, 50px, 100px, 0px);
 }
-
-.circle span {
-  width: 80px;
-  height: 80px;
-  border-radius: 100%;
+.diagram .piece::before {
+  content: '';
+  display: block;
   position: absolute;
-  opacity: 0.5;
-  border: 10px solid #b15ca3;
+  width: 50%;
+  height: 100%;
+}
+.diagram .piece.left {
+  transform: rotate(0deg);
+  z-index: 2;
+  border-radius: 50%; /* only FireFox < 75.0v (fix bug)*/
+}
+.diagram.over_50 .piece.left {
+  transform: rotate(180deg);
+}
+.diagram .piece.right {
+  transform: rotate(180deg);
+  z-index: 1;
+  border-radius: 50%; /* only FireFox < 75.0v (fix bug)*/
+}
+.diagram.over_50 .piece.right {
+  transform: rotate(360deg);
+}
+.diagram .left::before {
+  background: #059;
+}
+.diagram.over_50 .left::before {
+  background: #990;
+}
+.diagram .right::before {
+  background: #059;
+}
+.diagram .text {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.diagram .text span {
+  font-size: 64px;
+}
+.diagram .text span div {
+  font-size: 12px;
+  display: block;
+}
+/* -------------------------------Login--------------------------------- */
+
+#Ylogin{
+  position: fixed;
+  bottom: 220px;
+  left: calc(50% - 280px);
+  font-size: 1.5em;
 }
 
-.circle.left span {
-  clip: rect(0px, 50px, 100px, 0px);
-  -webkit-animation: rotate-left 30s  linear;
+#Elogin{
+  position: fixed;
+  top: 220px;
+  left: calc(50% - 280px);
+  font-size: 1.5em;
 }
 
-.circle.right span {
-  clip: rect(0, 100px, 100px, 50px);
-  -webkit-animation: rotate-right 30s  linear;
+#stone img{
+  width: 70px;
+  height: 70px;
 }
 
-@-webkit-keyframes rotate-left {
-  0% { -webkit-transform: rotate(0deg); border: 10px solid #000000;}
-  50% { -webkit-transform: rotate(180deg); border: 10px solid #594d57;}
-  100% { -webkit-transform: rotate(180deg); border: 10px solid #ff00d4;}
+#YourStone{
+  position: fixed;
+  bottom: 180px;
+  right: calc(50% - 540px);
 }
 
-@-webkit-keyframes rotate-right {
-  0% { -webkit-transform: rotate(0deg); }
-  50% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(180deg); }
+#EnemyStone{
+  position: fixed;
+  top: 180px;
+  right: calc(50% - 540px);
+}
+
+.DeStone{
+  opacity: 0.2;
+  filter: grayscale(100%);
+}
+
+#myProgress {
+  transform: rotate(-90deg);
+  position: fixed;
+  top: 50%;
+  right: 1px;
+  width: 600px;
+  background-color: none;
+  justify-content: center;
+}
+
+#myBar {
+  transition: 0.5s linear;
+  margin: auto;
+  width: 0%;
+  height: 30px;
+  background-color: green;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
