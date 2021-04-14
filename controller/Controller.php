@@ -20,7 +20,10 @@ class Controller {
       }
     }
     else {
-      if (isset($_POST["username"])) {
+      if (isset($_COOKIE['OponentInfo'])) {
+        $_SESSION["transition"] = "game";
+      }
+      else if (isset($_POST["username"])) {
         $_SESSION["transition"] = "chose_game";
         $_SESSION["user"] = $_POST["username"];
         setcookie("user", $_POST["username"], 0, "/");

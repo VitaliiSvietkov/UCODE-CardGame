@@ -18,8 +18,10 @@ client.onmessage = function (e) {
         searching = true;
         break;
       case 'OponentInfo':
-        console.log("Your oponent is ");
-        console.log(msg);
+        searching = false;
+        msg = JSON.stringify(msg);
+        document.cookie = `OponentInfo=${msg}; path=/; expires=0`;
+        document.getElementById('startGame').submit();
         break;
       default:
         break;
@@ -30,6 +32,7 @@ function findOponent() {
   if (searching) { // Stop searching query
     let arr = {operation: 'Delete', from: 'search_lobby', subject: 'serv_id', condition: 'myID'};
     client.send(JSON.stringify(arr));
+    searching = false;
   }
   else { // Send a searching query
     let characters = document.getElementsByName('fb');

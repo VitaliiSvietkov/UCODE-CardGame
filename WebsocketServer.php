@@ -617,6 +617,20 @@ class WebsocketHandler extends WebsocketWorker
                 $answer = $this->encode(json_encode($answer));
                 @fwrite($from, $answer);
                 $database->connection->query("DELETE FROM search_lobby WHERE serv_id=$serv_id");
+
+                $my_id = intval($from);
+                $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$my_id");
+                $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+                $answer = array("operation"=>"OponentInfo", "OponentID"=>$my_id, "OponentLogin"=>$fetch["login"]);
+                $answer = $this->encode(json_encode($answer));
+
+                $write = $this->clients;
+                foreach ($this->clients as $client) 
+                    if (intval($client) === (int)$serv_id) {
+                        @fwrite($client, $answer);
+                        echo "Found\n";
+                        break;
+                    }
             }
         }
     }
