@@ -9,40 +9,45 @@
 </head>
 <body>
 
-  <form action="" method="POST">
-      <button name="transit" value="exit">Log out</button>
-  </form>
-
     <div id="info">
-      <h3 id="name"></h3>
+      <h3 id="name">log</h3>
       <div style="display: flex; justify-content: center;">
-          <div id="wins"></div>
-          <div id="loses"></div>
+          <div>Win: <div id="wins">12</div></div>
+          <div>Defeat: <div id="loses">12</div></div>
+          
       </div>
-    </div>
-
+  </div>
 
     <form id="startGame" action="" method="POST" onsubmit="return findOponent();">
-      <input class='start-btn' value="START" type="submit">
+      
+        <div id="molot">
+          <input type="submit" value="START">
+          <img src="assets/images/molot.png" alt="">
+        </div>
 
-      <div id="chose_hero">
-        <label>
-          <input type="radio" name="fb" value="small"/>
-          <img src="assets/images/Thanos.gif">
-        </label>  
-        <label>
-          <input type="radio" name="fb" value="small" />
-          <img src="assets/images/2.gif">
-        </label>  
-        <label>
-          <input type="radio" name="fb" value="small" />
-          <img src="assets/images/3.gif">
-        </label>  
-      </div>
 
-      <div id="des"></div>
+       <div id="chose_hero">
+          <label>
+            <input type="radio" name="fb" value="small" />
+            <img class='gif' src="assets/images/Thanos.gif">
+          </label>  
+          <label>
+            <input type="radio" name="fb" value="small" />
+            <img class='gif' src="assets/images/2.gif">
+          </label>  
+          <label>
+            <input type="radio" name="fb" value="small" />
+            <img class='gif' src="assets/images/3.gif">
+          </label>  
+        </div>
+    <div id="des">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae officia vitae similique odit laudantium ratione nam qui accusantium! Sed, nihil odit. Molestias quod vel quos nemo, in soluta minima suscipit!</div>
     </form>
 
+    <form action="" method="POST">
+      <button id="logout" name="transit" value="exit">Log out</button>
+    </form>
+    
     <script src="js/lobby.js"></script>
+    
 </body>
 </html>

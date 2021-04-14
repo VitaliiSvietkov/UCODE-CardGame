@@ -3,8 +3,6 @@
   require_once(__DIR__ . "/controller/Controller.php");
 
   session_start();
-  session_destroy();
-  session_start();
 
   setcookie("servHost", $_SERVER['SERVER_NAME'], 0, "/");
 

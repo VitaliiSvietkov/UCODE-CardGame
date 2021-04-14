@@ -1,4 +1,4 @@
-/*var host = getCookie('servHost');
+var host = getCookie('servHost');
 var client = new WebSocket(`ws://${host}:8000`);
 
 setTimeout(() => {
@@ -17,7 +17,7 @@ client.onmessage = function (e) {
     default:
       break;
   }
-}*/
+}
 
 var enemy = new Hero();
 var enemyField = new Array();
@@ -54,7 +54,7 @@ function checkGame() {
     client.send(JSON.stringify(msg));
     return false;
   }
-  if (player.health <= 0 ) {
+  if (enemy.health <= 0 ) {
     let OponentInfo = JSON.parse(getCookie('OponentInfo'));
     let msg = {operation: "BattleFinish", winner: getCookie('user'), loser: OponentInfo['OponentLogin']};
     client.send(JSON.stringify(msg));
