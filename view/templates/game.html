@@ -11,6 +11,10 @@
   <!-- <input type="button" value="Rotate" onclick="rotateCoin()"> -->
   <div class="coin" id="coinFace"><div class="enemy_coin" id="coinBack"></div></div>
 
+  <form id="finish" action="" method="POST" onsubmit="return checkGame()">
+    <input type="submit" value="Surrender" onclick="surrender()">
+  </form>
+
   <div class="hand aly">
     <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>
     <div id="Ucard" class="card card_face"><div class="card card_back"></div></div>

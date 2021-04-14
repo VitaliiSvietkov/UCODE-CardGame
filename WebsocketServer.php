@@ -477,6 +477,12 @@ class WebsocketHandler extends WebsocketWorker
             case "Delete":
                 $this->Delete($data, $from);
                 break;
+            case "UpdateID":
+                $this->UpdateID($data, $from);
+                break;
+            case "BattleFinish":
+                $this->BattleFinish($data, $from);
+                break;
             case "registration":
                 $this->Register($data, $from);
                 break;
@@ -632,6 +638,45 @@ class WebsocketHandler extends WebsocketWorker
                         break;
                     }
             }
+        }
+    }
+
+    private function UpdateID($data, $from) {
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $login = $data["login"];
+            $uid = intval($from);
+            $database->connection->query("INSERT IGNORE INTO online_users (id, login) VALUES($uid, '$login')");
+        }
+    }
+
+    private function BattleFinish($data, $from) {
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $winner = $data["winner"];
+            $loser = $data["loser"];
+            $database->connection->query("UPDATE users SET win=win + 1 WHERE login='$winner'");
+            $database->connection->query("UPDATE users SET lose=lose + 1 WHERE login='$loser'");
+
+            $answer = array("operation"=>"BattleFinish", "status"=>"win");
+            $answer = $this->encode(json_encode($answer));
+            $statement = $database->connection->query("SELECT id FROM online_users WHERE login='$winner'");
+            $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+            foreach ($this->clients as $client)
+                if (intval($client) == $fetch["id"]) {
+                    @fwrite($client, $answer);
+                    break;
+                }
+            
+            $answer = array("operation"=>"BattleFinish", "status"=>"lose");
+            $answer = $this->encode(json_encode($answer));
+            $statement = $database->connection->query("SELECT id FROM online_users WHERE login='$loser'");
+            $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+            foreach ($this->clients as $client)
+                if (intval($client) == $fetch["id"]) {
+                    @fwrite($client, $answer);
+                    break;
+                }
         }
     }
 }

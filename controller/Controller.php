@@ -28,6 +28,10 @@ class Controller {
         $_SESSION["user"] = $_POST["username"];
         setcookie("user", $_POST["username"], 0, "/");
       }
+      else if (isset($_COOKIE["user"])) {
+        $_SESSION["transition"] = "chose_game";
+        $_SESSION["user"] = $_COOKIE["user"];
+      }
     }
     $this->view = new View(__DIR__ . "/../view/templates/" . $_SESSION["transition"] . ".html");
   }
