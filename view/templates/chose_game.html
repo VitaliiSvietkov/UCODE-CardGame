@@ -14,33 +14,33 @@
   </form>
 
     <div id="info">
-        <h3 id="name"></h3>
-        <div style="display: flex; justify-content: center;">
-            <div id="wins"></div>
-            <div id="loses"></div>
-        </div>
+      <h3 id="name"></h3>
+      <div style="display: flex; justify-content: center;">
+          <div id="wins"></div>
+          <div id="loses"></div>
+      </div>
     </div>
 
 
-    <form action="">
-        <input class='start-btn' value="START" type="submit">
+    <form action="" method="POST" onsubmit="return findOponent();">
+      <input class='start-btn' value="START" type="submit">
 
-    <div id="chose_hero">
-      <label>
-        <input type="radio" name="fb" value="small"/>
-        <img src="assets/images/Thanos.gif">
-      </label>  
-      <label>
-        <input type="radio" name="fb" value="small" />
-        <img src="assets/images/2.gif">
-      </label>  
-      <label>
-        <input type="radio" name="fb" value="small" />
-        <img src="assets/images/3.gif">
-      </label>  
-    </div>
+      <div id="chose_hero">
+        <label>
+          <input type="radio" name="fb" value="small"/>
+          <img src="assets/images/Thanos.gif">
+        </label>  
+        <label>
+          <input type="radio" name="fb" value="small" />
+          <img src="assets/images/2.gif">
+        </label>  
+        <label>
+          <input type="radio" name="fb" value="small" />
+          <img src="assets/images/3.gif">
+        </label>  
+      </div>
 
-    <div id="des"></div>
+      <div id="des"></div>
     </form>
 
     <script src="js/lobby.js"></script>

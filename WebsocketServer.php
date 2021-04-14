@@ -400,11 +400,35 @@ abstract class WebsocketWorker
 class WebsocketHandler extends WebsocketWorker
 {
     protected function onOpen($client, $info) {//вызывается при соединении с новым клиентом
-        echo "New connection! Client #" . intval($client) . "\n";
+        $uid = intval($client);
+        echo "New connection! Client #" . $uid . "\n";
+        /*
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $database->connection->query("CREATE TABLE IF NOT EXISTS online_users (
+                id INT NOT NULL KEY,
+                login VARCHAR(15) NULL UNIQUE
+            );");
+            $statement = $database->connection->query("INSERT IGNORE INTO online_users (id) VALUES($uid)");
+            if (!$statement)
+                echo "Error occured during user inserting!\n";
+        }
+        else
+            echo "Failed connecting to the database during user connection!\n";
+        */
     }
 
     protected function onClose($client) {//вызывается при закрытии соединения клиентом
-        echo "Client #" . intval($client) . " closed connection\n";
+        $uid = intval($client);
+        echo "Client #" . $uid . " closed connection\n";
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $statement = $database->connection->query("DELETE FROM online_users WHERE id=$uid");
+            if (!$statement)
+                echo "Error occured during user deleting!\n";
+        }
+        else
+            echo "Failed connecting to the database during user disconnection!\n";
     }
 
     protected function onMessage($client, $data) {//вызывается при получении сообщения от клиента
@@ -450,6 +474,9 @@ class WebsocketHandler extends WebsocketWorker
 
     private function Treat($data, $from) {
         switch ($data["operation"]) {
+            case "Delete":
+                $this->Delete($data, $from);
+                break;
             case "registration":
                 $this->Register($data, $from);
                 break;
@@ -462,9 +489,31 @@ class WebsocketHandler extends WebsocketWorker
             case "GETinfo":
                 $this->GETinfo($data, $from);
                 break;
+            case "MoveToSearchLobby":
+                $this->MoveToSearchLobby($data, $from);
+                break;
             default:
                 break;
         }
+    }
+
+    private function Delete($data, $from) {
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $table = $data["from"];
+            $subject = $data["subject"];
+            $condition = "";
+            switch ($data["condition"]) {
+                case "myID":
+                    $condition = intval($from);
+                    break;
+                default:
+                    break;
+            }
+            $database->connection->query("DELETE FROM $table WHERE $subject=$condition");
+        }
+        else
+            echo "Failed to connect to the database during deletion!\n";
     }
 
     private function Register($data, $from) {
@@ -518,9 +567,56 @@ class WebsocketHandler extends WebsocketWorker
     private function GETinfo($data, $from) {
         require_once(__DIR__ . "/models/User.php");
         $user_entity = new User("card_game", $data["target"]);
-        $answer = array("name"=>$user_entity->name, "email"=>$user_entity->email, "win"=>$user_entity->win,
+        $answer = array("operation"=>"InfoRespond", "name"=>$user_entity->name, "email"=>$user_entity->email, "win"=>$user_entity->win,
             "lose"=>$user_entity->lose);
         $answer = $this->encode(json_encode($answer));
         @fwrite($from, $answer);
+
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $uid = intval($from);
+            $database->connection->query("CREATE TABLE IF NOT EXISTS online_users (
+                id INT NOT NULL KEY,
+                login VARCHAR(15) NULL UNIQUE
+            );");
+            $statement = $database->connection->query("INSERT IGNORE INTO online_users (id, login) VALUES($uid, '$user_entity->login')");
+            if (!$statement)
+                echo "Error occured during user inserting!\n";
+        }
+        else
+            echo "Failed connecting to the database during user connection!\n";
+    }
+
+    private function MoveToSearchLobby($data, $from) {
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $database->connection->query("CREATE TABLE IF NOT EXISTS search_lobby (
+                id INT NOT NULL AUTO_INCREMENT KEY,
+                serv_id INT NOT NULL UNIQUE,
+                hero VARCHAR(15) NOT NULL
+            );");
+            $statement = $database->connection->query("SELECT * FROM search_lobby LIMIT 1");
+            $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+            if (!$fetch) { // No one is searching for a battle
+                $serv_id = intval($from);
+                $hero = $data["hero"];
+                $statement = $database->connection->query("INSERT IGNORE INTO search_lobby (serv_id, hero) VALUES($serv_id, $hero)");
+                if (!$statement)
+                    echo "Error!\n";
+                else {
+                    $answer = array("operation"=>"Searching");
+                    $answer = $this->encode(json_encode($answer));
+                    @fwrite($from, $answer);
+                }
+            }
+            else {
+                $serv_id = $fetch['serv_id'];
+                $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$serv_id");
+                $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+                $answer = array("operation"=>"OponentInfo", "OponentID"=>$serv_id, "OponentLogin"=>$fetch["login"]);
+                $answer = $this->encode(json_encode($answer));
+                @fwrite($from, $answer);
+            }
+        }
     }
 }
