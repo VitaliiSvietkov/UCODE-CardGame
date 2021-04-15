@@ -189,25 +189,6 @@ class Card {
     }
 }
 
-function card_click(e) {
-  //let tmp = document.getElementById('playerHand').removeChild(e.target);
-  //document.getElementById('playerField').appendChild(tmp);
-  tmp = e.target;
-  tmp.onclick = null;
-  for (let j = 0; j < playerHand.length; ++j) {
-    if (playerHand[j][0].element === tmp) {
-      let OponentInfo = JSON.parse(getCookie('OponentInfo'));
-      playerField.push(playerHand.splice(j, 1)[0][0]);
-      if (enemyField.length < 1)
-        playerField[playerField.length - 1].give_damage(enemy, 'non-silent');
-      else
-        playerField[playerField.length - 1].give_damage(enemyField[0], 'non-silent');
-      playedCard(playerField[playerField.length - 1].name, OponentInfo['OponentLogin'], client);
-      break;
-    }
-  }
-};
-
 function rotateCoin() {
   let coinFace = document.getElementById('coinFace');
   coinFace.style.transform = 'rotateX(' + ((turn*5)*180) + 'deg)';
@@ -276,4 +257,19 @@ function fillDeck(deck) {
 function playedCard(name, player, socket) {
   let msg = {operation: 'playCard', player: player, card: name};
   socket.send(JSON.stringify(msg));
+}
+
+function ReduceStones(card, stones, id) {
+  if (id === 'stone') {
+    playerStones -= card.cost;
+    stones = playerStones;
+  }
+  else {
+    enemyStones -= card.cost;
+    stones = enemyStones;
+  }
+  let children = document.getElementById(id).children;
+  for (let i = stones; i < 6; ++i) {
+      children[i].className = "DeStone";
+  }
 }

@@ -619,7 +619,11 @@ class WebsocketHandler extends WebsocketWorker
                 }
             }
             else {
-                $turn = rand(1, 2);
+                $turn = rand(1, 100);
+                if ($turn > 50)
+                    $turn = 0;
+                else
+                    $turn = 1;
 
                 $serv_id = $fetch['serv_id'];
                 $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$serv_id");
@@ -632,8 +636,8 @@ class WebsocketHandler extends WebsocketWorker
                 if ($turn === 2)
                     $turn = 1;
                 else
-                    $turn = 2;
-                    
+                    $turn = 0;
+
                 $my_id = intval($from);
                 $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$my_id");
                 $fetch = $statement->fetch(PDO::FETCH_ASSOC);
