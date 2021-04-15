@@ -1,8 +1,11 @@
 var host = getCookie('servHost');
 var client = new WebSocket(`ws://${host}:8000`);
 
+let OponentInfo = JSON.parse(getCookie('OponentInfo'));
+let PlayerInfo = JSON.parse(getCookie('PlayerInfo'));
+
 setTimeout(() => {
-  let msg = {operation: 'UpdateID', login: getCookie('user')};
+  let msg = {operation: 'UpdateID', login: PlayerInfo["PlayerLogin"], name: PlayerInfo["PlayerName"]};
   client.send(JSON.stringify(msg));
 }, 200);
 
@@ -28,6 +31,8 @@ client.onmessage = function (e) {
     case "BattleFinish":
       let OponentInfo = JSON.parse(getCookie('OponentInfo'));
       document.cookie = "OponentInfo=" + getCookie('OponentInfo') + "; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+      document.cookie = `user=${PlayerInfo['PlayerLogin']}; path=/; expires=0`;
+      document.cookie = "PlayerInfo=" + JSON.stringify(PlayerInfo) + "; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
       document.getElementById('finish').submit();
       break;
     case "playCard":

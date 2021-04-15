@@ -402,20 +402,6 @@ class WebsocketHandler extends WebsocketWorker
     protected function onOpen($client, $info) {//вызывается при соединении с новым клиентом
         $uid = intval($client);
         echo "New connection! Client #" . $uid . "\n";
-        /*
-        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
-        if ($database->getConnectionStatus()) {
-            $database->connection->query("CREATE TABLE IF NOT EXISTS online_users (
-                id INT NOT NULL KEY,
-                login VARCHAR(15) NULL UNIQUE
-            );");
-            $statement = $database->connection->query("INSERT IGNORE INTO online_users (id) VALUES($uid)");
-            if (!$statement)
-                echo "Error occured during user inserting!\n";
-        }
-        else
-            echo "Failed connecting to the database during user connection!\n";
-        */
     }
 
     protected function onClose($client) {//вызывается при закрытии соединения клиентом
@@ -591,7 +577,7 @@ class WebsocketHandler extends WebsocketWorker
                 id INT NOT NULL KEY,
                 login VARCHAR(15) NULL UNIQUE
             );");
-            $statement = $database->connection->query("INSERT IGNORE INTO online_users (id, login) VALUES($uid, '$user_entity->login')");
+            $statement = $database->connection->query("INSERT IGNORE INTO online_users (id, login, name) VALUES($uid, '$user_entity->login', '$user_entity->name')");
             if (!$statement)
                 echo "Error occured during user inserting!\n";
         }
@@ -629,9 +615,13 @@ class WebsocketHandler extends WebsocketWorker
                     $turn = 1;
 
                 $serv_id = $fetch['serv_id'];
+                $statement = $database->connection->query("SELECT * FROM search_lobby WHERE serv_id=$serv_id");
+                $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+                $avatar = $fetch["hero"];
+
                 $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$serv_id");
                 $fetch = $statement->fetch(PDO::FETCH_ASSOC);
-                $answer = array("operation"=>"OponentInfo", "OponentID"=>$serv_id, "OponentLogin"=>$fetch["login"], "Turn"=>$turn);
+                $answer = array("operation"=>"OponentInfo", "OponentID"=>$serv_id, "OponentLogin"=>$fetch["login"], "OponentName"=>$fetch["name"], "avatar"=>$avatar, "Turn"=>$turn);
                 $answer = $this->encode(json_encode($answer));
                 @fwrite($from, $answer);
                 $database->connection->query("DELETE FROM search_lobby WHERE serv_id=$serv_id");
@@ -642,9 +632,13 @@ class WebsocketHandler extends WebsocketWorker
                     $turn = 2;
 
                 $my_id = intval($from);
+                $statement = $database->connection->query("SELECT * FROM search_lobby WHERE serv_id=$my_id");
+                $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+                $avatar = $fetch["hero"];
+
                 $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$my_id");
                 $fetch = $statement->fetch(PDO::FETCH_ASSOC);
-                $answer = array("operation"=>"OponentInfo", "OponentID"=>$my_id, "OponentLogin"=>$fetch["login"], "Turn"=>$turn);
+                $answer = array("operation"=>"OponentInfo", "OponentID"=>$my_id, "OponentLogin"=>$fetch["login"], "OponentName"=>$fetch["name"], "avatar"=>$avatar, "Turn"=>$turn);
                 $answer = $this->encode(json_encode($answer));
 
                 $write = $this->clients;
@@ -662,8 +656,9 @@ class WebsocketHandler extends WebsocketWorker
         $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
         if ($database->getConnectionStatus()) {
             $login = $data["login"];
+            $name = $data["name"];
             $uid = intval($from);
-            $database->connection->query("INSERT IGNORE INTO online_users (id, login) VALUES($uid, '$login')");
+            $database->connection->query("INSERT IGNORE INTO online_users (id, login, name) VALUES($uid, '$login', '$name')");
         }
     }
 
@@ -721,7 +716,7 @@ class WebsocketHandler extends WebsocketWorker
             foreach ($this->clients as $client)
                 if (intval($client) == $fetch["id"]) {
                     echo json_encode($data) . "\n";
-                    $answer = $this->encode(json_encode($data));//json_encode($data));
+                    $answer = $this->encode(json_encode($data));
                     @fwrite($client, $answer);
                     break;
                 }

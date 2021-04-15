@@ -1,6 +1,10 @@
 var host = getCookie('servHost');
 var client = new WebSocket(`ws://${host}:8000`);
 
+var user = getCookie('user');
+document.cookie = "user=" + user + "; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+let hero = 0;
+
 var searching = false;
 var cardDesc = ['Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae officia vitae similique odit laudantium ratione nam qui accusantium! Sed, nihil odit. Molestias quod vel quos nemo, in soluta minima suscipit!',
     "second description", "third description"];
@@ -29,6 +33,8 @@ client.onmessage = function (e) {
 }
 
 function findOponent() {
+  let tmp_name = document.getElementById('name').innerHTML;
+  document.cookie = `PlayerInfo={"PlayerName":"${tmp_name}","PlayerLogin":"${user}","PlayerHero":"${hero}"}; path=/; expires=0`;
   if (searching) { // Stop searching query
     let arr = {operation: 'Delete', from: 'search_lobby', subject: 'serv_id', condition: 'myID'};
     client.send(JSON.stringify(arr));
@@ -36,24 +42,23 @@ function findOponent() {
   }
   else { // Send a searching query
     let characters = document.getElementsByName('fb');
-    let id = 0;
     if (characters[0].checked)
-      id = 0;
+      hero = 0;
     else if (characters[1].checked)
-      id = 1;
+      hero = 1;
     else if (characters[2].checked)
-      id = 2;
+      hero = 2;
     else {
       return false;
     }
-    let arr = {operation: 'MoveToSearchLobby', hero: id};
+    let arr = {operation: 'MoveToSearchLobby', hero: hero};
     client.send(JSON.stringify(arr));
   }
   return false;
 }
 
 function getItems() {
-    let arr = {operation: 'GETinfo', target: getCookie('user')};
+    let arr = {operation: 'GETinfo', target: user};
     client.send(JSON.stringify(arr));
 }
 
@@ -73,7 +78,7 @@ function getCookie(cname) {
     return "";
 }
 
-var characters =  document.getElementById('chose_hero').children;
+var characters = document.getElementById('chose_hero').children;
 for (let i = 0; i < characters.length; ++i) {
     characters[i].onclick = () => {
         document.getElementById('des').innerHTML = cardDesc[i];
