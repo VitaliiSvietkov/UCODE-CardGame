@@ -4,7 +4,7 @@ var client = new WebSocket(`ws://${host}:8000`);
 setTimeout(() => {
   let msg = {operation: 'UpdateID', login: getCookie('user')};
   client.send(JSON.stringify(msg));
-}, 150);
+}, 200);
 
 function ReduceStones(card, stones, id) {
   if (id === 'stone2') {
@@ -23,6 +23,7 @@ function ReduceStones(card, stones, id) {
 
 client.onmessage = function (e) {
   let msg = JSON.parse(e.data);
+  console.log(msg);
   switch (msg["operation"]) {
     case "BattleFinish":
       let OponentInfo = JSON.parse(getCookie('OponentInfo'));
@@ -45,6 +46,10 @@ client.onmessage = function (e) {
       else {
         enemyField[enemyField.length - 1].give_damage(playerField[0], 'silent');
       }
+      break;
+    case "EndTurn":
+      turn += 1;
+      end_turn();
       break;
     default:
       break;

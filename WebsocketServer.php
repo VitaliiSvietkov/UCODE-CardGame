@@ -477,6 +477,9 @@ class WebsocketHandler extends WebsocketWorker
             case "playCard":
                 $this->PlayCard($data, $from);
                 break;
+            case "EndTurn":
+                $this->EndTurn($data, $from);
+                break;
             case "Delete":
                 $this->Delete($data, $from);
                 break;
@@ -703,6 +706,22 @@ class WebsocketHandler extends WebsocketWorker
             foreach ($this->clients as $client)
                 if (intval($client) == $fetch["id"]) {
                     $answer = $this->encode(json_encode($data));
+                    @fwrite($client, $answer);
+                    break;
+                }
+        }
+    }
+
+    private function EndTurn($data, $from) {
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $target = $data['player'];
+            $statement = $database->connection->query("SELECT id FROM online_users WHERE login='$target'");
+            $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+            foreach ($this->clients as $client)
+                if (intval($client) == $fetch["id"]) {
+                    echo json_encode($data) . "\n";
+                    $answer = $this->encode(json_encode($data));//json_encode($data));
                     @fwrite($client, $answer);
                     break;
                 }

@@ -38,7 +38,7 @@ function start_game() {
             }
             if (timePassed1 > 3000) {
                 clearInterval(timer_1)
-                coinFace.onclick = end_turn
+                coinFace.onclick = perform_end_turn;
                 time()
             }
         }, 1)

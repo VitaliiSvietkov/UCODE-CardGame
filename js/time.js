@@ -13,6 +13,10 @@ function time() {
         clearInterval(id);
         i = 0;
 
+        let OponentInfo = JSON.parse(getCookie('OponentInfo'));
+        let msg = {operation: "EndTurn", player: OponentInfo["OponentLogin"]};
+        client.send(JSON.stringify(msg));
+        
         turn++
         let cards = document.querySelectorAll("div.SteckC > div.card")
         if(turn % 2 == 0 && cards.length != 0) {

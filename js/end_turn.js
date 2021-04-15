@@ -1,6 +1,15 @@
+function perform_end_turn() {
+    if (turn % 2 == 0) {
+        let OponentInfo = JSON.parse(getCookie('OponentInfo'));
+        let msg = {operation: "EndTurn", player: OponentInfo["OponentLogin"]};
+        client.send(JSON.stringify(msg));
+        turn++;
+        end_turn();
+    }
+}
 function end_turn() {
-    if(turn % 2 == 0){
-        turn++
+    //if(turn % 2 == 0) {
+        //turn++
         rotateCoin()
         clearInterval(id)
         i = 0
@@ -10,5 +19,5 @@ function end_turn() {
             time()
         }, 500)
         
-    }
+    //}
 }
