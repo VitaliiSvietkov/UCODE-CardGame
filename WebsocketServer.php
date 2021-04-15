@@ -633,7 +633,7 @@ class WebsocketHandler extends WebsocketWorker
                 @fwrite($from, $answer);
                 $database->connection->query("DELETE FROM search_lobby WHERE serv_id=$serv_id");
                 
-                if ($turn === 2)
+                if ($turn === 0)
                     $turn = 1;
                 else
                     $turn = 0;

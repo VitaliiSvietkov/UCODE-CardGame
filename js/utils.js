@@ -6,6 +6,21 @@ setTimeout(() => {
   client.send(JSON.stringify(msg));
 }, 150);
 
+function ReduceStones(card, stones, id) {
+  if (id === 'stone2') {
+    playerStones -= card.cost;
+    stones = playerStones;
+  }
+  else {
+    enemyStones -= card.cost;
+    stones = enemyStones;
+  }
+  let children = document.getElementById(id).children;
+  for (let i = stones; i < 6; ++i) {
+      children[i].className = "DeStone";
+  }
+}
+
 client.onmessage = function (e) {
   let msg = JSON.parse(e.data);
   switch (msg["operation"]) {
@@ -21,6 +36,7 @@ client.onmessage = function (e) {
       enemyHand.splice(index, 1);
       enemyField.push(new Card(msg['card']));
       document.getElementById('oponentField').appendChild(enemyField[enemyField.length - 1].element);
+      ReduceStones(enemyField[enemyField.length - 1], enemyStones, 'stone1');
 
       console.log(enemyField[enemyField.length - 1]);
       console.log(playerField[0]);
@@ -257,19 +273,4 @@ function fillDeck(deck) {
 function playedCard(name, player, socket) {
   let msg = {operation: 'playCard', player: player, card: name};
   socket.send(JSON.stringify(msg));
-}
-
-function ReduceStones(card, stones, id) {
-  if (id === 'stone') {
-    playerStones -= card.cost;
-    stones = playerStones;
-  }
-  else {
-    enemyStones -= card.cost;
-    stones = enemyStones;
-  }
-  let children = document.getElementById(id).children;
-  for (let i = stones; i < 6; ++i) {
-      children[i].className = "DeStone";
-  }
 }

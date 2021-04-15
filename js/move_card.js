@@ -9,13 +9,7 @@ body.onclick = function(event) {
                 if (playerHand[j][0].cost > playerStones)
                     return;
                 else {
-                    /*playerStones -= playerHand[j][0].cost;
-                    let stones = document.getElementById("stone").children;
-                    for (let i = playerStones - 1; i < 6; ++i) {
-                        if (i < 0) i = 0;
-                        stones[i].className = "DeStone";
-                    }*/
-                    ReduceStones(playerHand[j][0], playerStones, 'stone');
+                    ReduceStones(playerHand[j][0], playerStones, 'stone2');
                     break;
                 }
             }
