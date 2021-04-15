@@ -687,12 +687,10 @@ class WebsocketHandler extends WebsocketWorker
         $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
         if ($database->getConnectionStatus()) {
             $target = $data['player'];
-            echo "\n$target\n";
             $statement = $database->connection->query("SELECT id FROM online_users WHERE login='$target'");
             $fetch = $statement->fetch(PDO::FETCH_ASSOC);
             foreach ($this->clients as $client)
                 if (intval($client) == $fetch["id"]) {
-                    echo "\nSended\n";
                     $answer = $this->encode(json_encode($data));
                     @fwrite($client, $answer);
                     break;

@@ -122,14 +122,31 @@ class Card {
         }
     }
     give_damage(target, mode) {
-        if (target.type === "Hero") {
-            console.log(this.name);
-            target.take_damage(this.attack);
-            console.log(target.health);
-            if (mode !== 'silent')
-              checkGame();
+      target.take_damage(this.attack);
+      if (target.type === "Hero") {
+          if (mode !== 'silent')
+            checkGame();
+      }
+      return;
+    }
+    take_damage(damage) {
+      this.health -= damage;
+      if (this.health <= 0) {
+        let parent = this.element.parentNode;
+        parent.removeChild(this.element);
+        if (parent.id === 'playerField') {
+          for (let i = 0; i < playerField.length; ++i) {
+            if (playerField[i].element === this.element)
+              playerField.splice(i, 1);
+          }
         }
-        return;
+        else {
+          for (let i = 0; i < enemyField.length; ++i) {
+            if (enemyField[i].element === this.element)
+              enemyField.splice(i, 1);
+          }
+        }
+      }
     }
 }
 

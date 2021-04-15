@@ -21,7 +21,16 @@ client.onmessage = function (e) {
       enemyHand.splice(index, 1);
       enemyField.push(new Card(msg['card']));
       document.getElementById('oponentField').appendChild(enemyField[enemyField.length - 1].element);
-      enemyField[enemyField.length - 1].give_damage(player, 'silent');
+
+      console.log(enemyField[enemyField.length - 1]);
+      console.log(playerField[0]);
+      console.log(playerField.length);
+
+      if (playerField.length < 1)
+        enemyField[enemyField.length - 1].give_damage(player, 'silent');
+      else {
+        enemyField[enemyField.length - 1].give_damage(playerField[0], 'silent');
+      }
       break;
     default:
       break;
@@ -47,7 +56,10 @@ for (let i = 0; i < playerDeck.length; ++i) {
       if (playerHand[j][0].element === tmp) {
         let OponentInfo = JSON.parse(getCookie('OponentInfo'));
         playerField.push(playerHand.splice(j, 1)[0][0]);
-        playerField[playerField.length - 1].give_damage(enemy, 'non-silent');
+        if (enemyField.length < 1)
+          playerField[playerField.length - 1].give_damage(enemy, 'non-silent');
+        else
+          playerField[playerField.length - 1].give_damage(enemyField[0], 'non-silent');
         playedCard(playerField[playerField.length - 1].name, OponentInfo['OponentLogin'], client);
         break;
       }
