@@ -30,8 +30,8 @@ body.onclick = function(event) {
                 clearInterval(timer_1);
                 let table_aly = document.getElementById("playerField")
                 table_aly.append(event.target)
-                event.target.style.width = "125px"
-                event.target.style.height = "181.25px"
+                //event.target.style.width = "125px"
+                //event.target.style.height = "181.25px"
 
                 //let indent = playerHand.length + 28.5
                 //document.getElementsByClassName("hand")[0].style.right = "calc(50% - " + playerHand.length + "em)";
@@ -41,6 +41,7 @@ body.onclick = function(event) {
                     if (playerHand[j][0].element === event.target) {
                         let OponentInfo = JSON.parse(getCookie('OponentInfo'));
                         playerField.push(playerHand.splice(j, 1)[0][0]);
+                        table_aly.style.left = "0";
                         if (enemyField.length < 1)
                             playerField[playerField.length - 1].give_damage(enemy, 'non-silent');
                         else

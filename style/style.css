@@ -98,7 +98,7 @@ body{
 .hand .card:hover {
   width: calc(150px +10%); 
   height: calc(220px +10%); 
-  bottom: 20px; 
+  bottom: 65px; 
   background-size: contain;
   z-index: 2;
 }
@@ -106,16 +106,35 @@ body{
 .hand {
   height: 155px;
   position: fixed;
-  bottom: 80px;
+  bottom: 10px;
+  left: calc(50% - 7*(150px+5)/2);
+  display: flex;
+  gap: 5px;
+  transition: 0.5s linear;
+  z-index: 1;
+}
+
+.handUp .card{width:100px; height: 147px;}
+.handUp {
+  height: 50px;
+  position: fixed;
+  top: 5px;
+  left: calc(50% - 7*(100px+5)/2);
+  display: flex;
+  gap: 5px;
+}
+
+.handUp1{
+  position: fixed;
+  bottom: 320px;
   left: calc(50% - 7*(150px+5)/2);
   display: flex;
   gap: 5px;
 }
 
-.handUp {
-  height: 155px;
+.handUp2{
   position: fixed;
-  top: 5px;
+  top: 320px;
   left: calc(50% - 7*(150px+5)/2);
   display: flex;
   gap: 5px;
@@ -151,53 +170,59 @@ body{
 /* ===========================AVA============================= */
 
  #you{
+   width: 120px;
+   height: 120px;
    position: fixed;
-   bottom: 270px;
+   bottom: 180px;
    right: calc(50% - 150px/2);
-   z-index: 2;
+   z-index: 0;
  }
 
  #enemy{
+  width: 120px;
+  height: 120px;
   position: fixed;
-  top: 235px;
+  top: 160px;
   right: calc(50% - 150px/2);
 }
 
 /* -------------------------------Login--------------------------------- */
 
 #Ylogin{
+  text-align: right;
   color: #fff;
   text-shadow: 1px 1px 2px black, 0 0 1em black;
   position: fixed;
-  bottom: 280px;
-  left: calc(50% - 280px);
+  bottom: 180px;
+  left: calc(50% - 180px);
   font-size: 1.5em;
 }
 
 #Elogin{
+  text-align: right;
   color: #fff;
   text-shadow: 1px 1px 2px black, 0 0 1em black;
   position: fixed;
-  top: 260px;
-  left: calc(50% - 280px);
+  top: 170px;
+  left: calc(50% - 180px);
   font-size: 1.5em;
 }
 
 .stone img{
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 65px;
 }
 
 #YourStone{
   position: fixed;
-  bottom: 270px;
-  right: calc(50% - 540px);
+  bottom: 180px;
+  right: calc(50% - 510px);
 }
 
 #EnemyStone{
   position: fixed;
-  top: 250px;
-  right: calc(50% - 540px);
+  top: 170px;
+  right: calc(50% - 510px);
 }
 
 .DeStone{
@@ -229,7 +254,7 @@ body{
 #finish{
   
   position: fixed;
-  bottom: 270px;
+  bottom: 260px;
   left: calc(50% - 25px/2 + 50px);
   z-index: 2;
 }

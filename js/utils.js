@@ -37,6 +37,7 @@ client.onmessage = function (e) {
       enemyField.push(new Card(msg['card']));
       document.getElementById('oponentField').appendChild(enemyField[enemyField.length - 1].element);
       document.getElementsByClassName("handUp")[0].style.left = "calc(50% - " + enemyHand.length + "*(150px+5)/2)";
+      document.getElementsByClassName("handUp2")[0].style.left = "calc(50% - " + enemyField.length + "*(150px+5)/2)";
       ReduceStones(enemyField[enemyField.length - 1], enemyStones, 'stone1');
 
       if (playerField.length < 1)
@@ -67,8 +68,6 @@ class Card {
 
         this.path = "assets/images/Characters/" + name + ".png";
         this.element = document.createElement('div');
-        this.element.className = 'card';
-        this.element.style.backgroundImage = "url(\"" + this.path + "\")";
 
         switch (name) {
           case 'Avengers':
@@ -172,6 +171,14 @@ class Card {
             this.cost = 0;
             break;
         }
+        if (name !== 'card_back') {
+          let defense = document.createElement('div');
+          defense.id = 'num';
+          defense.innerHTML = this.health;
+          this.element.appendChild(defense);
+        }
+        this.element.className = 'card';
+        this.element.style.backgroundImage = "url(\"" + this.path + "\")";
     }
     give_damage(target, mode) {
       target.take_damage(this.attack);
@@ -198,6 +205,9 @@ class Card {
               enemyField.splice(i, 1);
           }
         }
+      }
+      else {
+        this.element.children[0].innerHTML = this.health;
       }
     }
 }
