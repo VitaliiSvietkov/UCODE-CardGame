@@ -49,8 +49,9 @@ var playerHand = new Array(); // Contains cards that player possess;
 var playerField = new Array(); // Contains played cards
 for (let i = 0; i < playerDeck.length; ++i) {
   playerDeck[i].element.onclick = function(e) {
-    let tmp = document.getElementById('playerHand').removeChild(e.target);
-    document.getElementById('playerField').appendChild(tmp);
+    //let tmp = document.getElementById('playerHand').removeChild(e.target);
+    //document.getElementById('playerField').appendChild(tmp);
+    tmp = e.target;
     tmp.onclick = null;
     for (let j = 0; j < playerHand.length; ++j) {
       if (playerHand[j][0].element === tmp) {

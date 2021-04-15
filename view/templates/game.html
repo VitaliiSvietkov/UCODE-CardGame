@@ -6,42 +6,43 @@
   <meta name="description" content="Card Game">
   <link rel="stylesheet" href="style/style.css">
   <script src="js/utils.js"></script>
+  <script src="./js/start_game.js"></script>
 </head>
 
-<body>
+<body onload="start_game()">
   <!-- <input type="button" value="Rotate" onclick="rotateCoin()"> -->
-<div id="myProgress">
-  <div id="myBar"></div>
-</div>
+  <div id="myProgress">
+    <div id="myBar"></div>
+  </div>
 
-<form id="finish" action="" method="POST" onsubmit="return checkGame()">
-  <input type="submit" value="Surrender" onclick="surrender()">
-</form>
+  <form id="finish" action="" method="POST" onsubmit="return checkGame()">
+    <input type="submit" value="Surrender" onclick="surrender()">
+  </form>
 
-<script src="js/time.js"></script>
-
-
-  <div class="coin" id="coinFace"><div class="enemy_coin" id="coinBack"></div></div>
+  <div class="coin" id="coinFace">
+    <div class="enemy_coin" id="coinBack"></div>
+  </div>
 
   <div id="playerHand" class="hand"></div>
 
-  <div id="playerField" class="hand" style="display: fixed; top: 50%;"></div>
-  <div id="oponentField" class="hand" style="display: fixed; top: 30%;"></div>
-
   <img id="enemy" src="assets/images/2.gif" alt="">
 
-  <div id="Elogin">Login enemy</div>
-  <div id="Ylogin">Your login</div>
+  <div id="Elogin">Login enemy
+    <div>HP: 18/20</div>
+  </div>
+  
+  <div id="Ylogin">Your login
+    <div>HP: 18/20</div>
+  </div>
 
 
   <img id="you" src="assets/images/3.gif" alt="">
   <div id="oponentHand" class="handUp"></div>
 
-  <div id="SteckC">
-    <div class="card"></div>
+  <div class="SteckC">
+    <!-- <div class="card"></div> -->
   </div>
   
-
 
   <div id="YourStone">
     <div id="stone">
@@ -64,10 +65,12 @@
       <img src="assets/images/stone/6.png" class="DeStone" alt="">
     </div>
   </div>
+  <div id="playerField"></div>
+  <div id="oponentField" class="hand" style="display: fixed; top: 30%;"></div>
 
-
-
+  <script src="js/time.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/move_card.js"></script>
 </body>
 
 </html>
