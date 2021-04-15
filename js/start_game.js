@@ -3,7 +3,7 @@ let turn = 1;
 function start_game() {
     let OponentInfo = JSON.parse(getCookie('OponentInfo'));
     turn = OponentInfo["Turn"];
-
+    
     let coinFace = document.getElementById('coinFace');
     coinFace.style.position = "fixed"
     coinFace.style.left = "47.5%"
@@ -38,6 +38,7 @@ function start_game() {
             }
             if (timePassed1 > 3000) {
                 clearInterval(timer_1)
+                coinFace.onclick = end_turn
                 time()
             }
         }, 1)

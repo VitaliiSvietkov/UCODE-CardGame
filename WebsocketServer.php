@@ -621,7 +621,7 @@ class WebsocketHandler extends WebsocketWorker
             else {
                 $turn = rand(1, 100);
                 if ($turn > 50)
-                    $turn = 0;
+                    $turn = 2;
                 else
                     $turn = 1;
 
@@ -633,10 +633,10 @@ class WebsocketHandler extends WebsocketWorker
                 @fwrite($from, $answer);
                 $database->connection->query("DELETE FROM search_lobby WHERE serv_id=$serv_id");
                 
-                if ($turn === 0)
+                if ($turn === 2)
                     $turn = 1;
                 else
-                    $turn = 0;
+                    $turn = 2;
 
                 $my_id = intval($from);
                 $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$my_id");

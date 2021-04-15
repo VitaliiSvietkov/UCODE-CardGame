@@ -1,11 +1,12 @@
+let id
 var i = 0;
 function time() {
   if (i == 0) {
     i = 1;
     var msec = 0;
     var elem = document.getElementById("myBar");
-    var width = 100;
-    var id = setInterval(frame, 300); //300
+    let width = 100;
+    id = setInterval(frame, 300); //300
     function frame() {
       msec += 300;
       if (width <= 0) {
@@ -29,7 +30,6 @@ function time() {
     }
   }
 }
-
 function take_card() {
   if(turn > 1){
     let new_card = document.querySelector("div.SteckC > div.card")
@@ -55,10 +55,6 @@ function take_card() {
             your_hand.append(new_card)
             new_card.style.removeProperty('left')
             new_card.style.removeProperty('top')
-            // your_hand.style.display = "flex"                    для выравнивания руки
-            // your_hand.style.justifyContent = "center"
-            // your_hand.style.textAlign = "center"
-            // your_hand.style.left = "calc(50% - 30em)"
             
 
             let cards = document.querySelectorAll("div.hand > div.card")
@@ -66,10 +62,7 @@ function take_card() {
             // time()
             // rotateCoin()
             document.getElementById("myBar").style.backgroundColor = "green";
-
-            // let indent = cards.length + 28.5
-            // your_hand.style.right = "calc(50% - " + indent + "em)"                    для выравнивания руки
-          }
+            }
         }, 1)
       }
     }, 1)
