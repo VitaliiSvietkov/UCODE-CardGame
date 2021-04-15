@@ -474,6 +474,9 @@ class WebsocketHandler extends WebsocketWorker
 
     private function Treat($data, $from) {
         switch ($data["operation"]) {
+            case "playCard":
+                $this->PlayCard($data, $from);
+                break;
             case "Delete":
                 $this->Delete($data, $from);
                 break;
@@ -674,6 +677,23 @@ class WebsocketHandler extends WebsocketWorker
             $fetch = $statement->fetch(PDO::FETCH_ASSOC);
             foreach ($this->clients as $client)
                 if (intval($client) == $fetch["id"]) {
+                    @fwrite($client, $answer);
+                    break;
+                }
+        }
+    }
+
+    private function PlayCard($data, $from) {
+        $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
+        if ($database->getConnectionStatus()) {
+            $target = $data['player'];
+            echo "\n$target\n";
+            $statement = $database->connection->query("SELECT id FROM online_users WHERE login='$target'");
+            $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+            foreach ($this->clients as $client)
+                if (intval($client) == $fetch["id"]) {
+                    echo "\nSended\n";
+                    $answer = $this->encode(json_encode($data));
                     @fwrite($client, $answer);
                     break;
                 }

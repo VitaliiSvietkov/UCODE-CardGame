@@ -14,6 +14,15 @@ client.onmessage = function (e) {
       document.cookie = "OponentInfo=" + getCookie('OponentInfo') + "; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
       document.getElementById('finish').submit();
       break;
+    case "playCard":
+      document.getElementById('oponentHand').removeChild(document.getElementById('oponentHand').firstChild);
+      let index = Math.floor(Math.random() * enemyHand.length - 1);
+      if (index < 0) index = 0;
+      enemyHand.splice(index, 1);
+      enemyField.push(new Card(msg['card']));
+      document.getElementById('oponentField').appendChild(enemyField[enemyField.length - 1].element);
+      enemyField[enemyField.length - 1].give_damage(player, 'silent');
+      break;
     default:
       break;
   }
@@ -21,13 +30,12 @@ client.onmessage = function (e) {
 
 var enemy = new Hero();
 var enemyField = new Array();
+var enemyHand = new Array();
 var enemyStones = 6;
 
 var player = new Hero();
-var playerDeck = new Array(new Card('Avengers', 5, 6, 4), new Card('Battlefield', 2, 6, 3), new Card('BlackBolt', 2, 2, 1), new Card('BlackWidow', 4, 2, 2), new Card('CapitainAmerica', 4, 4, 2),
-  new Card('Collapse', 6, 2, 3), new Card('Conflict', 6, 6, 4), new Card('DayWatch', 2, 2, 1), new Card('Defeat', 5, 2, 3), new Card('IronManWithStones', 6, 4, 4), new Card('Nightcrawler', 2, 1, 1),
-  new Card('Rage', 5, 1, 2), new Card('Reborn', 4, 3, 3), new Card('Spider-man', 2, 2, 2), new Card('Thing', 2, 5, 3), new Card('Vision', 5, 5, 3), new Card('WarMachine', 6, 5, 3),
-  new Card('WarOfTheRealms', 5, 4, 4), new Card('Wolverine', 3, 3, 2))
+var playerDeck = new Array();
+fillDeck(playerDeck);
 var playerHand = new Array(); // Contains cards that player possess;
 var playerField = new Array(); // Contains played cards
 for (let i = 0; i < playerDeck.length; ++i) {
@@ -37,8 +45,10 @@ for (let i = 0; i < playerDeck.length; ++i) {
     tmp.onclick = null;
     for (let j = 0; j < playerHand.length; ++j) {
       if (playerHand[j][0].element === tmp) {
+        let OponentInfo = JSON.parse(getCookie('OponentInfo'));
         playerField.push(playerHand.splice(j, 1)[0][0]);
-        playerField[playerField.length - 1].give_damage(enemy);
+        playerField[playerField.length - 1].give_damage(enemy, 'non-silent');
+        playedCard(playerField[playerField.length - 1].name, OponentInfo['OponentLogin'], client);
         break;
       }
     }
@@ -72,5 +82,8 @@ for (let i = 0; i < 7; ++i) {
   if (index < 0) index = 0;
   document.getElementById('playerHand').appendChild(playerDeck[index].element);
   playerHand.push(playerDeck.splice(index, 1));
-  console.log(playerHand.length);
+}
+for (let i = 0; i < 7; ++i) {
+  enemyHand.push(new Card('card_back'));
+  document.getElementById('oponentHand').appendChild(enemyHand[i].element);
 }
