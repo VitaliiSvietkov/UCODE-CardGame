@@ -631,7 +631,7 @@ class WebsocketHandler extends WebsocketWorker
                 else
                     $turn = 2;
 
-                // $my_id = intval($from);
+                 $my_id = intval($from);
                 // $statement = $database->connection->query("SELECT * FROM search_lobby WHERE serv_id=$my_id");
                 // $fetch = $statement->fetch(PDO::FETCH_ASSOC);
                 $avatar = $data["hero"];//$fetch["hero"];
