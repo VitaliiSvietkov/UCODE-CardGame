@@ -42,8 +42,10 @@ body.onclick = function(event) {
                         let OponentInfo = JSON.parse(getCookie('OponentInfo'));
                         playerField.push(playerHand.splice(j, 1)[0][0]);
                         table_aly.style.left = "0";
-                        if (enemyField.length < 1)
+                        if (enemyField.length < 1) {
                             playerField[playerField.length - 1].give_damage(enemy, 'non-silent');
+                            document.getElementById('ehp').innerHTML = "HP: " + enemy.health + "/20";
+                        }
                         else
                             playerField[playerField.length - 1].give_damage(enemyField[0], 'non-silent');
                         

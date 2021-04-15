@@ -13,18 +13,14 @@ function time() {
         clearInterval(id);
         i = 0;
 
-        let OponentInfo = JSON.parse(getCookie('OponentInfo'));
-        let msg = {operation: "EndTurn", player: OponentInfo["OponentLogin"]};
-        client.send(JSON.stringify(msg));
-        
-        turn++
+        perform_end_turn();
+
         let cards = document.querySelectorAll("div.SteckC > div.card")
-        if(turn % 2 == 0 && cards.length != 0) {
-          take_card()
-        }
-        rotateCoin()
-        time()
-        document.getElementById("myBar").style.backgroundColor = "green";
+        if (turn % 2 == 0)
+          take_card('playerHand');
+        else
+          take_card('oponentHand')
+
       } else {
         if (msec > 20000) document.getElementById("myBar").style.backgroundColor = "orange";
         if (msec > 25000) document.getElementById("myBar").style.backgroundColor = "red";
@@ -34,9 +30,30 @@ function time() {
     }
   }
 }
-function take_card() {
-  if(turn > 1){
-    let new_card = document.querySelector("div.SteckC > div.card")
+function take_card(hand) {
+    console.log("Entered");
+
+    if (hand === 'oponentHand') {
+      Deck.push(new Card('card_back'));
+      document.getElementsByClassName('SteckC')[0].appendChild(Deck[1].element);
+    }
+    else {
+      let index = Math.floor(Math.random() * playerDeck.length - 1);
+      if (index < 0) index = 0;
+      document.getElementsByClassName('SteckC')[0].appendChild(playerDeck[index].element);
+      let card = playerDeck.splice(index, 1);
+      Deck.push(card);
+    } 
+
+    //let new_card = document.querySelector("div.SteckC > div.card");
+    let new_card = document.getElementsByClassName("SteckC")[0].lastChild;
+    let element = Deck.pop();
+    if (hand === 'oponentHand') {
+      enemyHand.push(element);
+    }
+    else {
+      playerHand.push(element);
+    }
 
     let start1 = Date.now(); // запомнить время начала
     let timer_1 = setInterval(function() {
@@ -55,7 +72,8 @@ function take_card() {
           }
           if (timePassed2 > 300) {
             clearInterval(timer_2);
-            let your_hand = document.getElementsByClassName("hand")[0]
+            //let your_hand = document.getElementsByClassName("hand")[0];
+            let your_hand = document.getElementById(hand);
             your_hand.append(new_card)
             new_card.style.removeProperty('left')
             new_card.style.removeProperty('top')
@@ -63,13 +81,11 @@ function take_card() {
 
             let cards = document.querySelectorAll("div.hand > div.card")
             new_card.setAttribute("id", ''+cards.length)
-            // time()
-            // rotateCoin()
+
+            console.log('test');
             document.getElementById("myBar").style.backgroundColor = "green";
             }
         }, 1)
       }
-    }, 1)
-  }
-  
+    }, 1)  
 }

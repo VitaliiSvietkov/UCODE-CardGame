@@ -6,8 +6,7 @@ document.cookie = "user=" + user + "; path=/; expires=Thu, 01 Jan 1970 00:00:01 
 let hero = 0;
 
 var searching = false;
-var cardDesc = ['Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae officia vitae similique odit laudantium ratione nam qui accusantium! Sed, nihil odit. Molestias quod vel quos nemo, in soluta minima suscipit!',
-    "second description", "third description"];
+var cardDesc = ['', "", ""];
 
 client.onmessage = function (e) {
     console.log(e.data);

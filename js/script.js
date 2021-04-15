@@ -1,6 +1,28 @@
 document.getElementById('ename').innerHTML = OponentInfo["OponentName"] + " (" + OponentInfo["OponentLogin"] + ")";
 document.getElementById('ehp').innerHTML = "HP: 20/20";
 document.getElementById('pname').innerHTML = PlayerInfo["PlayerName"] + " (" + PlayerInfo["PlayerLogin"] + ")";
+document.getElementById('php').innerHTML = "HP: 20/20";
+
+console.log(OponentInfo["avatar"]);
+
+let enemy_avatar = document.getElementById('enemy');
+if (OponentInfo["avatar"] === '0')
+  enemy_avatar.src = 'assets/images/Thanos.gif';
+else if (OponentInfo["avatar"] === '1')
+  enemy_avatar.src = "assets/images/2.gif";
+else
+  enemy_avatar.src = 'assets/images/3.gif';
+
+let player_avatar = document.getElementById('you');
+if (PlayerInfo["PlayerHero"] === '0')
+  player_avatar.src = 'assets/images/Thanos.gif';
+else if (PlayerInfo["PlayerHero"] === '1')
+  player_avatar.src = "assets/images/2.gif";
+else
+  player_avatar.src = 'assets/images/3.gif';
+  
+
+var Deck = new Array(new Card('card_back'));
 
 var enemy = new Hero();
 var enemyField = new Array();
@@ -36,15 +58,20 @@ function surrender() {
 }
 
 
-for (let i = 0; i < 7; ++i) {
+for (let i = 0; i < 3; ++i) {
   let index = Math.floor(Math.random() * playerDeck.length - 1);
   if (index < 0) index = 0;
   document.getElementById('playerHand').appendChild(playerDeck[index].element);
   let card = playerDeck.splice(index, 1);
   playerHand.push(card);
 }
-for (let i = 0; i < 7; ++i) {
+document.getElementsByClassName("hand")[0].style.left = "calc(50% - " + (playerHand.length - 1) + "*(150px+5)/2)";
+for (let i = 0; i < 3; ++i) {
   enemyHand.push(new Card('card_back'));
   document.getElementById('oponentHand').appendChild(enemyHand[i].element);
 }
+document.getElementsByClassName('SteckC')[0].appendChild(Deck[0].element);
+document.getElementsByClassName("handUp")[0].style.left = "calc(50% - " + (enemyHand.length - 1) + "*(150px+5)/2)";
+
+
 

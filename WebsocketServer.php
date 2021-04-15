@@ -631,10 +631,10 @@ class WebsocketHandler extends WebsocketWorker
                 else
                     $turn = 2;
 
-                $my_id = intval($from);
-                $statement = $database->connection->query("SELECT * FROM search_lobby WHERE serv_id=$my_id");
-                $fetch = $statement->fetch(PDO::FETCH_ASSOC);
-                $avatar = $fetch["hero"];
+                // $my_id = intval($from);
+                // $statement = $database->connection->query("SELECT * FROM search_lobby WHERE serv_id=$my_id");
+                // $fetch = $statement->fetch(PDO::FETCH_ASSOC);
+                $avatar = $data["hero"];//$fetch["hero"];
 
                 $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$my_id");
                 $fetch = $statement->fetch(PDO::FETCH_ASSOC);
@@ -645,7 +645,6 @@ class WebsocketHandler extends WebsocketWorker
                 foreach ($this->clients as $client) 
                     if (intval($client) === (int)$serv_id) {
                         @fwrite($client, $answer);
-                        echo "Found\n";
                         break;
                     }
             }

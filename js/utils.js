@@ -24,12 +24,26 @@ function ReduceStones(card, stones, id) {
   }
 }
 
+function RecoverStones(stones, id) {
+  if (id === 'stone2')
+    stones = playerStones;
+  else 
+    stones = enemyStones;
+  
+  let children = document.getElementById(id).children;
+  for (let i = stones - 1; i < 6; ++i) {
+      if (i < 0) i = 0;
+      children[i].className = children[i].className.replace("DeStone", "");
+      break;
+  }
+
+}
+
 client.onmessage = function (e) {
   let msg = JSON.parse(e.data);
   console.log(msg);
   switch (msg["operation"]) {
     case "BattleFinish":
-      let OponentInfo = JSON.parse(getCookie('OponentInfo'));
       document.cookie = "OponentInfo=" + getCookie('OponentInfo') + "; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
       document.cookie = `user=${PlayerInfo['PlayerLogin']}; path=/; expires=0`;
       document.cookie = "PlayerInfo=" + JSON.stringify(PlayerInfo) + "; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT";
@@ -46,14 +60,20 @@ client.onmessage = function (e) {
       document.getElementsByClassName("handUp2")[0].style.left = "calc(50% - " + enemyField.length + "*(150px+5)/2)";
       ReduceStones(enemyField[enemyField.length - 1], enemyStones, 'stone1');
 
-      if (playerField.length < 1)
+      if (playerField.length < 1) {
         enemyField[enemyField.length - 1].give_damage(player, 'silent');
+        document.getElementById('php').innerHTML = "HP: " + player.health + "/20";
+      }
       else {
         enemyField[enemyField.length - 1].give_damage(playerField[0], 'silent');
       }
       break;
     case "EndTurn":
       turn += 1;
+      if (playerStones < 6) {
+        playerStones += 1;
+        RecoverStones(playerStones, 'stone2');
+      }
       end_turn();
       break;
     default:
