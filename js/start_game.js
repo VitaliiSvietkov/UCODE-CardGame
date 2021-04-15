@@ -1,8 +1,8 @@
-let turn = Math.floor(Math.random() * 2)
-if(turn == 0) {
-    turn = 2
-}
+let turn = 1;
+
 function start_game() {
+    let OponentInfo = JSON.parse(getCookie('OponentInfo'));
+    turn = OponentInfo["Turn"];
 
     let coinFace = document.getElementById('coinFace');
     coinFace.style.position = "fixed"

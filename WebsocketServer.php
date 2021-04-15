@@ -619,18 +619,25 @@ class WebsocketHandler extends WebsocketWorker
                 }
             }
             else {
+                $turn = rand(1, 2);
+
                 $serv_id = $fetch['serv_id'];
                 $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$serv_id");
                 $fetch = $statement->fetch(PDO::FETCH_ASSOC);
-                $answer = array("operation"=>"OponentInfo", "OponentID"=>$serv_id, "OponentLogin"=>$fetch["login"]);
+                $answer = array("operation"=>"OponentInfo", "OponentID"=>$serv_id, "OponentLogin"=>$fetch["login"], "Turn"=>$turn);
                 $answer = $this->encode(json_encode($answer));
                 @fwrite($from, $answer);
                 $database->connection->query("DELETE FROM search_lobby WHERE serv_id=$serv_id");
-
+                
+                if ($turn === 2)
+                    $turn = 1;
+                else
+                    $turn = 2;
+                    
                 $my_id = intval($from);
                 $statement = $database->connection->query("SELECT * FROM online_users WHERE id=$my_id");
                 $fetch = $statement->fetch(PDO::FETCH_ASSOC);
-                $answer = array("operation"=>"OponentInfo", "OponentID"=>$my_id, "OponentLogin"=>$fetch["login"]);
+                $answer = array("operation"=>"OponentInfo", "OponentID"=>$my_id, "OponentLogin"=>$fetch["login"], "Turn"=>$turn);
                 $answer = $this->encode(json_encode($answer));
 
                 $write = $this->clients;

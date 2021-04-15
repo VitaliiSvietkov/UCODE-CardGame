@@ -31,7 +31,21 @@ body.onclick = function(event) {
                 // }
 
                 let indent = playerHand.length + 28.5
-                document.getElementsByClassName("hand")[0].style.right = "calc(50% - " + indent + "em)"
+                document.getElementsByClassName("hand")[0].style.right = "calc(50% - " + indent + "em)";
+
+                tmp = event.target;
+                for (let j = 0; j < playerHand.length; ++j) {
+                    if (playerHand[j][0].element === tmp) {
+                    let OponentInfo = JSON.parse(getCookie('OponentInfo'));
+                    playerField.push(playerHand.splice(j, 1)[0][0]);
+                    if (enemyField.length < 1)
+                        playerField[playerField.length - 1].give_damage(enemy, 'non-silent');
+                    else
+                        playerField[playerField.length - 1].give_damage(enemyField[0], 'non-silent');
+                    playedCard(playerField[playerField.length - 1].name, OponentInfo['OponentLogin'], client);
+                    break;
+                    }
+                }
             }
         }, 1);
         function draw_top(timePassed) {
