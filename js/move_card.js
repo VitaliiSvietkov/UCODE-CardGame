@@ -33,8 +33,9 @@ body.onclick = function(event) {
                 event.target.style.width = "125px"
                 event.target.style.height = "181.25px"
 
-                let indent = playerHand.length + 28.5
-                document.getElementsByClassName("hand")[0].style.right = "calc(50% - " + indent + "em)";
+                //let indent = playerHand.length + 28.5
+                //document.getElementsByClassName("hand")[0].style.right = "calc(50% - " + playerHand.length + "em)";
+                document.getElementsByClassName("hand")[0].style.left = "calc(50% - " + (playerHand.length - 1) + "*(150px+5)/2)";
 
                 for (let j = 0; j < playerHand.length; ++j) {
                     if (playerHand[j][0].element === event.target) {

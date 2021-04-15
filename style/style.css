@@ -1,8 +1,12 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700;900&display=swap');
+@font-face {
+  font-family: gwent; /* Имя шрифта */
+  src: url(../assets/font/hinted-GWENT-ExtraBold.ttf)
+ }
 
 * {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: gwent;
 }
 
 body{
@@ -71,8 +75,9 @@ body{
 /*                            CARD                            */
 /* ========================================================== */
 .card {
-  width: 100px;
-  height: 145px;
+
+  width: 150px;
+  height: 220px;
 
   transition: all 0.3s;
   -o-transition: all 0.3s;
@@ -85,38 +90,33 @@ body{
   background-size: 100%;
   border-radius: 5px;
   position: relative;
-  background-image: url("../assets/images/Yennefer_Conjurer.png");
+  background-image: url("../assets/images/Characters/Avengers.png");
   justify-content: center;
   text-align: center;
 }
 
-/* .hand .card:hover {
-  width: 110px; 
-  height: 160px;
+.hand .card:hover {
+  width: calc(150px +10%); 
+  height: calc(220px +10%); 
   bottom: 20px; 
   background-size: contain;
   z-index: 2;
-} */
+}
 
 .hand {
-  position: fixed;
   height: 155px;
-  top: 85%;
-  top: 87%;
-  left: calc(50% - 23em);
+  position: fixed;
+  bottom: 80px;
+  left: calc(50% - 7*(150px+5)/2);
   display: flex;
-  justify-content: center;
-  text-align: center;
   gap: 5px;
-  /* border: 5px dashed black; */
 }
 
 .handUp {
+  height: 155px;
   position: fixed;
-  width: fit-content;
-  height: fit-content;
-  top: 25px;
-  left: calc(50% - 30em);
+  top: 5px;
+  left: calc(50% - 7*(150px+5)/2);
   display: flex;
   gap: 5px;
 }
@@ -135,8 +135,6 @@ body{
  }
 
  #playerField {
-  /* background-color: none; */
-  /* border: 2px dashed black; */
   position: relative;
   width: 99%;
   height: 20%;
@@ -154,113 +152,33 @@ body{
 
  #you{
    position: fixed;
-   bottom: 175px;
+   bottom: 270px;
    right: calc(50% - 150px/2);
    z-index: 2;
  }
 
  #enemy{
   position: fixed;
-  top: 175px;
+  top: 235px;
   right: calc(50% - 150px/2);
 }
 
-/* -------------------------------TIMER--------------------------------- */
-.diagram {
-  width: 200px;
-  height:200px;
-  top: 5%;
-  left: 87%;
-
-  border-radius: 50%;
-  background: #990;
-  position: relative;
-  overflow: hidden;
-}
-.diagram::before {
-  content: '';
-  display: block;
-  position: absolute;
-  top:20px;
-  left:20px;
-  right:20px;
-  bottom:20px;
-  border-radius: 50%;
-  background: #ccc;
-  z-index: 3;
-  opacity: 1;
-}
-.diagram .piece {
-  width: 100%;
-  height: 100%;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  position: absolute;
-}
-.diagram .piece::before {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 50%;
-  height: 100%;
-}
-.diagram .piece.left {
-  transform: rotate(0deg);
-  z-index: 2;
-  border-radius: 50%; /* only FireFox < 75.0v (fix bug)*/
-}
-.diagram.over_50 .piece.left {
-  transform: rotate(180deg);
-}
-.diagram .piece.right {
-  transform: rotate(180deg);
-  z-index: 1;
-  border-radius: 50%; /* only FireFox < 75.0v (fix bug)*/
-}
-.diagram.over_50 .piece.right {
-  transform: rotate(360deg);
-}
-.diagram .left::before {
-  background: #059;
-}
-.diagram.over_50 .left::before {
-  background: #990;
-}
-.diagram .right::before {
-  background: #059;
-}
-.diagram .text {
-  position: absolute;
-  z-index: 3;
-  top: 0;
-  bottom: 0;
-  left:0;
-  right:0;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.diagram .text span {
-  font-size: 64px;
-}
-.diagram .text span div {
-  font-size: 12px;
-  display: block;
-}
 /* -------------------------------Login--------------------------------- */
 
 #Ylogin{
+  color: #fff;
+  text-shadow: 1px 1px 2px black, 0 0 1em black;
   position: fixed;
-  bottom: 220px;
+  bottom: 280px;
   left: calc(50% - 280px);
   font-size: 1.5em;
 }
 
 #Elogin{
+  color: #fff;
+  text-shadow: 1px 1px 2px black, 0 0 1em black;
   position: fixed;
-  top: 220px;
+  top: 260px;
   left: calc(50% - 280px);
   font-size: 1.5em;
 }
@@ -272,13 +190,13 @@ body{
 
 #YourStone{
   position: fixed;
-  bottom: 180px;
+  bottom: 270px;
   right: calc(50% - 540px);
 }
 
 #EnemyStone{
   position: fixed;
-  top: 180px;
+  top: 250px;
   right: calc(50% - 540px);
 }
 
@@ -290,7 +208,7 @@ body{
 #myProgress {
   transform: rotate(-90deg);
   position: fixed;
-  top: 50%;
+  top: 47.5%;
   right: 1px;
   width: 600px;
   background-color: none;
@@ -300,8 +218,43 @@ body{
 #myBar {
   transition: 0.5s linear;
   margin: auto;
+  justify-content: center;
   width: 0%;
   height: 30px;
   background-color: green;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* -----------------------------finish----------------------------------- */
+#finish{
+  
+  position: fixed;
+  bottom: 270px;
+  left: calc(50% - 25px/2 + 50px);
+  z-index: 2;
+}
+
+#finish input{
+  transition: all 0.2s;
+  width: 40px;
+  height: 40px;
+  color:rgba(0, 0, 0, 0.891);
+  border-radius: 100px;
+  font-size:32px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.476);
+  text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em rgb(255, 255, 255);
+  
+}
+
+#finish input:hover{
+  color: rgb(165, 64, 47);
+}
+
+#num{
+  color: #fff;
+  font-size:26px;
+  margin: 48px 109px auto 0;
+  text-shadow: 1px 1px 2px rgb(0, 0, 0), 0 0 1em rgb(0, 0, 0);
 }

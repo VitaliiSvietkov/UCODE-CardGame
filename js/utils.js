@@ -36,11 +36,8 @@ client.onmessage = function (e) {
       enemyHand.splice(index, 1);
       enemyField.push(new Card(msg['card']));
       document.getElementById('oponentField').appendChild(enemyField[enemyField.length - 1].element);
+      document.getElementsByClassName("handUp")[0].style.left = "calc(50% - " + enemyHand.length + "*(150px+5)/2)";
       ReduceStones(enemyField[enemyField.length - 1], enemyStones, 'stone1');
-
-      console.log(enemyField[enemyField.length - 1]);
-      console.log(playerField[0]);
-      console.log(playerField.length);
 
       if (playerField.length < 1)
         enemyField[enemyField.length - 1].give_damage(player, 'silent');

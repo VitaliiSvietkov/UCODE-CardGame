@@ -15,10 +15,6 @@
     <div id="myBar"></div>
   </div>
 
-  <form id="finish" action="" method="POST" onsubmit="return checkGame()">
-    <input type="submit" value="Surrender" onclick="surrender()">
-  </form>
-
   <div class="coin" id="coinFace">
     <div class="enemy_coin" id="coinBack"></div>
   </div>
@@ -43,6 +39,9 @@
     <!-- <div class="card"></div> -->
   </div>
   
+  <form id="finish" action="" method="POST" onsubmit="return checkGame()">
+    <input type="submit" value="X" onclick="surrender()">
+  </form>
 
   <div id="YourStone">
     <div id="stone2" class="stone">
@@ -66,7 +65,7 @@
     </div>
   </div>
   <div id="playerField"></div>
-  <div id="oponentField" class="hand" style="display: fixed; top: 30%;"></div>
+  <div id="oponentField" style="display: fixed; top: 30%;"></div>
 
   <script src="js/time.js"></script>
   <script src="js/script.js"></script>
