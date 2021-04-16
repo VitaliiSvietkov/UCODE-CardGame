@@ -75,7 +75,7 @@ body{
 /*                            CARD                            */
 /* ========================================================== */
 .card {
-
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
   width: 150px;
   height: 220px;
 
@@ -256,7 +256,7 @@ body{
 #finish{
   
   position: fixed;
-  bottom: 260px;
+  bottom: 175px;
   left: calc(50% - 25px/2 + 50px);
   z-index: 2;
 }
