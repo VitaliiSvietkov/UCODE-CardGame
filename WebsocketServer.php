@@ -360,7 +360,7 @@ abstract class WebsocketWorker
             $dataLength = $payloadLength + $payloadOffset;
         }
 
-        /**
+        /*
          * We have to check for large frames here. socket_recv cuts at 1024 bytes
          * so if websocket-frame is > 1024 bytes we have to wait until whole
          * data is transferd.
@@ -399,7 +399,7 @@ abstract class WebsocketWorker
 //пример реализации чата
 class WebsocketHandler extends WebsocketWorker
 {
-    protected function onOpen($client, $info) {//вызывается при соединении с новым клиентом
+    protected function onOpen($client, $info) { //вызывается при соединении с новым клиентом
         $uid = intval($client);
         echo "New connection! Client #" . $uid . "\n";
     }
@@ -420,18 +420,15 @@ class WebsocketHandler extends WebsocketWorker
     protected function onMessage($client, $data) {//вызывается при получении сообщения от клиента
         $data = $this->decode($data);
 
-        if (!$data['payload']) {
+        if (!$data['payload'])
             return;
-        }
 
-        if (!mb_check_encoding($data['payload'], 'utf-8')) {
+        if (!mb_check_encoding($data['payload'], 'utf-8'))
             return;
-        }
         
         //var_export($data);
         //шлем всем сообщение, о том, что пишет один из клиентов
         $message = 'пользователь #' . intval($client) . ' (' . $this->pid . '): ' . strip_tags($data['payload']);
-        echo $message . "\n";
 
         $this->send($message);
         
@@ -575,7 +572,8 @@ class WebsocketHandler extends WebsocketWorker
             $uid = intval($from);
             $database->connection->query("CREATE TABLE IF NOT EXISTS online_users (
                 id INT NOT NULL KEY,
-                login VARCHAR(15) NULL UNIQUE
+                login VARCHAR(15) NULL UNIQUE,
+                name TEXT NOT NULL
             );");
             $statement = $database->connection->query("INSERT IGNORE INTO online_users (id, login, name) VALUES($uid, '$user_entity->login', '$user_entity->name')");
             if (!$statement)
@@ -589,9 +587,9 @@ class WebsocketHandler extends WebsocketWorker
         $database = new DatabaseConnection('127.0.0.1', null, 'root', '', 'card_game');
         if ($database->getConnectionStatus()) {
             $database->connection->query("CREATE TABLE IF NOT EXISTS search_lobby (
-                id INT NOT NULL AUTO_INCREMENT KEY,
-                serv_id INT NOT NULL UNIQUE,
-                hero VARCHAR(15) NOT NULL
+                serv_id INT NOT NULL,
+                hero VARCHAR(15) NOT NULL,
+                FOREIGN KEY (serv_id) REFERENCES online_users (id) ON DELETE CASCADE
             );");
             $statement = $database->connection->query("SELECT * FROM search_lobby LIMIT 1");
             $fetch = $statement->fetch(PDO::FETCH_ASSOC);
@@ -714,7 +712,6 @@ class WebsocketHandler extends WebsocketWorker
             $fetch = $statement->fetch(PDO::FETCH_ASSOC);
             foreach ($this->clients as $client)
                 if (intval($client) == $fetch["id"]) {
-                    echo json_encode($data) . "\n";
                     $answer = $this->encode(json_encode($data));
                     @fwrite($client, $answer);
                     break;
