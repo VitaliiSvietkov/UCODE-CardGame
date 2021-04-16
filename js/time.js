@@ -1,4 +1,4 @@
-let id
+let id;
 var i = 0;
 function time() {
   if (i == 0) {
@@ -6,7 +6,7 @@ function time() {
     var msec = 0;
     var elem = document.getElementById("myBar");
     let width = 100;
-    id = setInterval(frame, 300); //300
+    id = setInterval(frame, 300); // 30 seconds round
     function frame() {
       msec += 300;
       if (width <= 0) {
@@ -43,7 +43,6 @@ function take_card(hand) {
       Deck.push(card);
     } 
 
-    //let new_card = document.querySelector("div.SteckC > div.card");
     let new_card = document.getElementsByClassName("SteckC")[0].lastChild;
     let element = Deck.pop();
     if (hand === 'oponentHand') {
@@ -70,7 +69,6 @@ function take_card(hand) {
           }
           if (timePassed2 > 300) {
             clearInterval(timer_2);
-            //let your_hand = document.getElementsByClassName("hand")[0];
             let your_hand = document.getElementById(hand);
             your_hand.append(new_card)
             new_card.style.removeProperty('left')

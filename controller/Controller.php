@@ -24,12 +24,12 @@ class Controller {
         $_SESSION["transition"] = "game";
       }
       else if (isset($_POST["username"])) {
-        $_SESSION["transition"] = "chose_game";
+        $_SESSION["transition"] = "lobby";
         $_SESSION["user"] = $_POST["username"];
         setcookie("user", $_POST["username"], 0, "/");
       }
       else if (isset($_COOKIE["user"])) {
-        $_SESSION["transition"] = "chose_game";
+        $_SESSION["transition"] = "lobby";
         $_SESSION["user"] = $_COOKIE["user"];
       }
     }

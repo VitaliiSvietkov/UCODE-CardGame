@@ -1,6 +1,6 @@
-let body = document.getElementsByClassName("hand")[0]
-let check_fst = true
-let check_scnd = true
+let body = document.getElementsByClassName("hand")[0];
+let check_fst = true;
+let check_scnd = true;
 body.onclick = function(event) {
     if(event.target.classList.contains("card") && !event.target.classList.contains("on_battle") && turn%2 == 0) {
         // Check the cost and stones
