@@ -16,7 +16,6 @@ function end_turn() {
         take_card('playerHand');
     else
         take_card('oponentHand');
-    //turn++;
     rotateCoin()
     clearInterval(id)
     i = 0

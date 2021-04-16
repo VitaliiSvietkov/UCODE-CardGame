@@ -15,9 +15,8 @@ body.onclick = function(event) {
             }
         }
         
-        console.log(document.getElementById(event.target.id))
-        event.target.style.position = "relative"
-        event.target.classList.add("on_battle")
+        event.target.style.position = "relative";
+        event.target.classList.add("on_battle");
         let start1 = Date.now(); // запомнить время начала
 
 
@@ -30,11 +29,7 @@ body.onclick = function(event) {
                 clearInterval(timer_1);
                 let table_aly = document.getElementById("playerField")
                 table_aly.append(event.target)
-                //event.target.style.width = "125px"
-                //event.target.style.height = "181.25px"
-
-                //let indent = playerHand.length + 28.5
-                //document.getElementsByClassName("hand")[0].style.right = "calc(50% - " + playerHand.length + "em)";
+                
                 document.getElementsByClassName("hand")[0].style.left = "calc(50% - " + (playerHand.length - 1) + "*(150px+5)/2)";
 
                 for (let j = 0; j < playerHand.length; ++j) {

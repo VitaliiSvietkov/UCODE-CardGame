@@ -3,38 +3,38 @@ document.getElementById('ehp').innerHTML = "HP: 20/20";
 document.getElementById('pname').innerHTML = PlayerInfo["PlayerName"] + " (" + PlayerInfo["PlayerLogin"] + ")";
 document.getElementById('php').innerHTML = "HP: 20/20";
 
-console.log(OponentInfo["avatar"]);
-
 let enemy_avatar = document.getElementById('enemy');
 if (OponentInfo["avatar"] === '0')
   enemy_avatar.src = 'assets/images/Thanos.gif';
 else if (OponentInfo["avatar"] === '1')
-  enemy_avatar.src = "assets/images/2.gif";
+  enemy_avatar.src = "assets/images/Natasha.gif";
 else
-  enemy_avatar.src = 'assets/images/3.gif';
+  enemy_avatar.src = 'assets/images/Bolt.gif';
 
 let player_avatar = document.getElementById('you');
 if (PlayerInfo["PlayerHero"] === '0')
   player_avatar.src = 'assets/images/Thanos.gif';
 else if (PlayerInfo["PlayerHero"] === '1')
-  player_avatar.src = "assets/images/2.gif";
+  player_avatar.src = "assets/images/Natasha.gif";
 else
-  player_avatar.src = 'assets/images/3.gif';
+  player_avatar.src = 'assets/images/Bolt.gif';
   
 
-var Deck = new Array(new Card('card_back'));
-
 var enemy = new Hero();
-var enemyField = new Array();
-var enemyHand = new Array();
-var enemyStones = 6;
-
 var player = new Hero();
-var playerDeck = new Array();
+
+var Deck = new Array(new Card('card_back')); // A deck from which new cards will be given to the hand of player and enemy
+var playerDeck = new Array();                // A deck of users card collection
 fillDeck(playerDeck);
-var playerHand = new Array(); // Contains cards that player possess;
-var playerField = new Array(); // Contains played cards
+
+var playerHand = new Array();   // Contains cards that player possess;
+var enemyHand = new Array();
+
+var playerField = new Array();  // Contains played cards
+var enemyField = new Array();
+
 var playerStones = 6;
+var enemyStones = 6;
 
 function checkGame() {
   if (player.health <= 0 ) {
@@ -72,6 +72,3 @@ for (let i = 0; i < 3; ++i) {
 }
 document.getElementsByClassName('SteckC')[0].appendChild(Deck[0].element);
 document.getElementsByClassName("handUp")[0].style.left = "calc(50% - " + (enemyHand.length - 1) + "*(150px+5)/2)";
-
-
-

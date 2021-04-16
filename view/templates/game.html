@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta name="description" content="Card Game">
   <link rel="stylesheet" href="style/style.css">
+  <script src="js/GameClasses.js"></script>
   <script src="js/utils.js"></script>
-  <script src="./js/start_game.js"></script>
+  <script src="js/start_game.js"></script>
 </head>
 
 <body onload="start_game()">
-  <!-- <input type="button" value="Rotate" onclick="rotateCoin()"> -->
   <div id="myProgress">
     <div id="myBar"></div>
   </div>
@@ -21,7 +21,7 @@
 
   <div id="playerHand" class="hand"></div>
 
-  <img id="enemy" src="assets/images/2.gif" alt="">
+  <img id="enemy" src="assets/images/Natasha.gif" alt="">
 
   <div id="Elogin">
     <div id="ename">Login enemy</div>
@@ -37,9 +37,7 @@
   <img id="you" src="assets/images/3.gif" alt="">
   <div id="oponentHand" class="handUp"></div>
 
-  <div class="SteckC">
-    <!-- <div class="card"></div> -->
-  </div>
+  <div class="SteckC"></div>
   
   <form id="finish" action="" method="POST" onsubmit="return checkGame()">
     <input type="submit" value="X" onclick="surrender()">

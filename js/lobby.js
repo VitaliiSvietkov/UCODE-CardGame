@@ -9,7 +9,6 @@ var searching = false;
 var cardDesc = ['', "", ""];
 
 client.onmessage = function (e) {
-    console.log(e.data);
     let msg = JSON.parse(e.data);
     switch (msg['operation']) {
       case 'InfoRespond':

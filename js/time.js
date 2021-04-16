@@ -31,8 +31,6 @@ function time() {
   }
 }
 function take_card(hand) {
-    console.log("Entered");
-
     if (hand === 'oponentHand') {
       Deck.push(new Card('card_back'));
       document.getElementsByClassName('SteckC')[0].appendChild(Deck[1].element);
@@ -82,7 +80,6 @@ function take_card(hand) {
             let cards = document.querySelectorAll("div.hand > div.card")
             new_card.setAttribute("id", ''+cards.length)
 
-            console.log('test');
             document.getElementById("myBar").style.backgroundColor = "green";
             }
         }, 1)

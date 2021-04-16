@@ -2,7 +2,6 @@ var host = getCookie('servHost');
 var client = new WebSocket(`ws://${host}:8000`);
 
 client.onmessage = function (e) {
-  console.log(e.data);
   let msg = JSON.parse(e.data);
   let status = msg['status'];
   if (status === 'FAIL') {

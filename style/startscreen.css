@@ -15,7 +15,7 @@ body {
   padding: 0;
   margin: 0;
 
-  background-image: url("../assets/images/Background/wp4943547-marvel-art-wallpapers.jpg");
+  background-image: url("../assets/images/Background/StartscreenBackground.jpg");
   background-repeat: no-repeat;
   background-size: auto 100%;
   background-position: center top;
@@ -42,16 +42,13 @@ form {
   padding: 20px;
   border-radius: 20px;
 
-  /* background: green; */
   transition: all 0.2s;
   margin: auto;
 }
 
 input {
   padding: 10px;
-  /* border-radius: 10px; */
   outline: none;
-  /* border: 1px solid black; */
 
   font-size: 1.2rem;
   color: white;
@@ -75,7 +72,6 @@ input:hover::placeholder{
 button {
   padding: 10px;
   outline: none;
-  /* border: 1px solid black; */
   border: none;
   font-size: 1.2rem;
   transition: 0.5s linear;
