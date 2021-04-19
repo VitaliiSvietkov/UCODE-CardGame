@@ -22,7 +22,12 @@ Each card has some attributes: attack, defense and its cost.
 * Cost, as you can understand, is the value of card and is situated in the `top right corner`. What users will pay for cards will be explained later.
 <p align="center"><img src="assets/images/Characters/Collapse.png" width="300px" height="450px"><img src="assets/images/Characters/card_back.png" width="300px" height="450px"></p>
 
-<h1> <p align=center>What could be done and improved? </h1>
+<h1> <p align=center>Rules</p> </h1>
+
+* To <b>find an oponent</b>, you need first to select your hero (I wanted to create some special abilities for them, but there was no time anymore to implement it, so this does not influence on anything) and click on the <b>START</b> button in the main menu. After this, you are moved to the searching room. If there already was someone, you immediately start a game with him. There are no visualization of searching process, but it is there, so if you click again on the <b>START</b> button you will be removed from the searching room.
+<p align=center><img src="media/MainMenu.png" width="500px"></p>
+
+<h1> <p align=center>What could be done and improved?</p> </h1>
 
 1. At the moment, it is barely impossible to win or lose without surrender as a result of disbalanced cards' price, attack and defense stats. To fix it, individual card abilities should be added, just like in GWENT or Hearthstone. This will give possibility to destroy enemy's cards faster and with less amount of your cards. In addition, the player should be able to choose, what card he/she wants to attack.
 2. The game has no penalties for being "AFK", so when the time of round (30 sec) passes, the user that did not make a move should be somehow penaltied.
