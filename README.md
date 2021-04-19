@@ -9,6 +9,14 @@
 4. Now you are ready to host the project - host the ```index.php``` file using ```PHP Server``` extension of ```VS Code``` or any other method.
 5. Open second incognito window, copy address from the previously opened tab. Now you are able to examine battle process.
 
+<h1> <p align=center>Card explanation</p> </h1>
+
+Each card has some attributes: attack, defense and its cost.
+* The attack attribute, which is situated in the `left top corner` of the card, is the amount of damage that it will deal to the enemy or his/her card.
+* Defense is "health" of the card and it is situated just under the attack icon. On the image it is empty, because it is set during the creation using JS to be able to reduce it after damage and display new value.
+* Cost, as you can understand, is the value of card and is situated in the `top right corner`. What users will pay for cards will be explained later.
+<p align="center"><img src="assets/images/Characters/Collapse.png" width="300px" height="450px"><img src="assets/images/Characters/card_back.png" width="300px" height="450px"></p>
+
 <h1> <p align=center>What could be done and improved? </h1>
 
 1. At the moment, it is barely impossible to win or lose without surrender as a result of disbalanced cards' price, attack and defense stats. To fix it, individual card abilities should be added, just like in GWENT or Hearthstone. This will give possibility to destroy enemy's cards faster and with less amount of your cards. In addition, the player should be able to choose, what card he/she wants to attack.
