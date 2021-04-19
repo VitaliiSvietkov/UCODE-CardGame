@@ -1,5 +1,6 @@
 # <p align=center>UCODE-CardGame</p>
 <p align=center>Implementation of a card game in a battle variation (Gwent and Hearthstone as references) using PHP/JavaScript/HTML/CSS/MySQL</p>
+<p align=center><img src="https://web-creator.ru/uploads/Page/43/php.svg" width="300px" alt="PHP image"> <img src="https://miro.medium.com/max/1540/0*6e2K0U6ZkN9Ju9iL.jpg" width="300px" alt="JS image"> <img src="https://upload.wikimedia.org/wikipedia/ru/d/d3/Mysql.png" width="300px" alt="MySQL image"></p>
 
 <h1> <p align=center>How to use it?</p> </h1>
 
