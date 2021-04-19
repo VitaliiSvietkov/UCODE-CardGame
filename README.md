@@ -2,12 +2,16 @@
 <p align=center>Implementation of a card game in a battle variation (Gwent and Hearthstone as references) using PHP/JavaScript/HTML/CSS/MySQL</p>
 <p align=center><img src="https://web-creator.ru/uploads/Page/43/php.svg" width="300px" alt="PHP image"> <img src="https://miro.medium.com/max/1540/0*6e2K0U6ZkN9Ju9iL.jpg" width="300px" alt="JS image"> <img src="https://upload.wikimedia.org/wikipedia/ru/d/d3/Mysql.png" width="300px" alt="MySQL image"></p>
 
+<h1> <p align=center>Important!</p> </h1>
+
+You need to have already installed MySQL and PHP version that supports `pcntl_fork()` function, in another case you will not be able to run the server. Besides, server must be run on the hosting machine (this is due to the fact that connection to the WebsocketServer is done using the same IP ($_SERVER['SERVER_NAME']) as in the Hosting server). If you want to use project on different computers, they must be in the same local network.
+
 <h1> <p align=center>How to use it?</p> </h1>
 
 1. First of all, start the MySql server typing ```mysql.server restart``` command in your terminal.
 2. Next, run the queries located in the ```db.sql``` file from the root directory in the ```mysql``` environment.
 3. Open new terminal window and run the ```server.php``` file from the root directory of the project typing ```php server.php```.
-4. Now you are ready to host the project - host the ```index.php``` file using ```PHP Server``` extension of ```VS Code``` or any other method.
+4. Now you are ready to host the project - host the ```index.php``` file using ```PHP Server``` extension of ```VS Code``` or any other method (if you are going to connect from the other computer, do not forget to set your IPv4 in the ```PHP server``` extansion properties).
 5. Open second incognito window, copy address from the previously opened tab. Now you are able to examine battle process.
 
 <h1> <p align=center>Card explanation</p> </h1>
