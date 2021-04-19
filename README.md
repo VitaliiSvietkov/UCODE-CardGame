@@ -25,7 +25,21 @@ Each card has some attributes: attack, defense and its cost.
 <h1> <p align=center>Rules</p> </h1>
 
 * To <b>find an oponent</b>, you need first to select your hero (I wanted to create some special abilities for them, but there was no time anymore to implement it, so this does not influence on anything) and click on the <b>START</b> button in the main menu. After this, you are moved to the searching room. If there already was someone, you immediately start a game with him. There are no visualization of searching process, but it is there, so if you click again on the <b>START</b> button you will be removed from the searching room.
+
 <p align=center><img src="media/MainMenu.png" width="500px"></p>
+
+* Your aim is to reduce your oponent's health to zero. When you are playing cards, they deal damage to <b>the most left</b> enemy's card or if there none of them, to the enemy himself. This is how the battlefield looks like.
+
+<img src="media/Battle.png" width="400px"> <img src="media/ReducedHP.png">
+
+* At the beginning of the game, the player has 6 "infinity stones" and 3 cards. Each card has a cost from 1 to 4 of infinity stones. You can play as many cards as you want until you have enough stones for it.
+
+<p align=center><img src="media/Stones.png" width="600px">
+<img src="media/Cards.png" width="600px"></p>
+
+* If the coin has blue background, this is your turn to make a move. With red - your oponent's turn. At the beginning of player's turn, he/she will receive a new card. To skip a round players can click on the coin or wait 30 seconds (indicator will show how many time you have). If you want to end game (surrender) you can click on the "cross" image situated at your avatar which is on the left from the stones.
+
+<p align=center><img src="media/Coin.png" height="284px"> <img src="media/Surrender.png"></p>
 
 <h1> <p align=center>What could be done and improved?</p> </h1>
 
